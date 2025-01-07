@@ -1,0 +1,11 @@
+version: '4.6.0'
+
+services:
+  financas:
+    image: bitnami/postgresql
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRESQL_DATABASE=financas
+      - POSTGRESQL_USERNAME=leandro
+      - POSTGRESQL_PASSWORD=contas

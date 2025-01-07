@@ -1,0 +1,124 @@
+const selectedRowId = localStorage.getItem('selectedRowId');
+const editarDespesa = document.getElementById('editarDespesa');
+
+const descricao = document.getElementById('descricao');
+const meioPagamento = document.getElementById('meioPagamento');
+const valor = document.getElementById('valor');
+
+editarDespesa.addEventListener('click', async (e) => {
+
+  e.preventDefault();
+
+  if (selectedRowId === null) {
+    alert('Selecione uma despesa para editar.');
+    return;
+  }
+
+  const saida = await atualizarDespesa();
+
+  console.log('saida', saida);
+  
+
+  if (saida === null) {
+    window.location.href = './tela_inicial.html';
+    alert('Despesa não encontrada.');
+    return;
+  }
+
+  if (saida) {
+    alert('Despesa atualizada com sucesso!');
+    window.location.href = './tela_inicial.html';
+  } else {
+    alert('Erro ao atualizar despesa.');
+  }
+});
+
+async function atualizarDespesa() {
+  try {
+    const response = await fetch(`http://localhost:2578/atualiza/saida/${selectedRowId}?token=784faf47-6ef0-4bef-9d0b-7a28558067d6`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${localStorage.getItem('token')}`
+      },
+      body: JSON.stringify({
+        "valor": Number(valor.value),
+        "descricao": descricao.value,
+        "meioPagamento": meioPagamento.value,
+        "dtcadastro": data
+      })
+    });    
+
+    if (response.status === 400) {
+      window.location.href = './tela_inicial.html';
+      return null;
+    }
+    
+    if (response.ok) {
+      const data = await response.json();
+      return data.saida;
+    }
+  } catch (err) {
+    console.error('Erro na requisição:', err);
+    alert('Erro ao conectar ao servidor.');
+  }
+}
+
+async function buscaDadosSaida() {
+  try {
+    const response = await fetch(`http://localhost:2578/saida/${selectedRowId}?token=784faf47-6ef0-4bef-9d0b-7a28558067d6`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${localStorage.getItem('token')}`
+      }
+    });
+
+    if (response.status === 400) {
+      window.location.href = './tela_inicial.html';
+      return null;
+    }
+
+    if (response.ok) {
+      const data = await response.json();
+      return data.saida;
+    }   
+
+  } catch (err) {
+    console.error('Erro na requisição:', err);
+    alert('Erro ao conectar ao servidor.');
+  }
+}
+
+let data = '';
+
+async function carregarSaida() {
+  const saida = await buscaDadosSaida();
+
+  if (saida === null) {
+    window.location.href = './tela_inicial.html';
+    alert('Despesa não encontrada.');
+    return;
+  }
+
+  data = saida.dtcadastro;
+  
+  document.getElementById('descricao').value = saida.descricao;
+  document.getElementById('meioPagamento').value = saida.meioPagamento;
+  document.getElementById('valor').value = saida.valor;
+}
+
+window.onload = function () {
+
+  const isValid = isTokenValid();
+
+  if (isValid === null) {
+    window.location.href = '../Login/index.html'
+  } else if (!isValid) {
+    logoutUser();
+  } else {
+    carregarSaida();
+    setupAutoLogout();
+  }
+
+};

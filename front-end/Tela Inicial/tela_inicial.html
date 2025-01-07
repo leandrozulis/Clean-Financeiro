@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Controle Financeiro</title>
+    <link rel="stylesheet" href="style/tela_inicial_style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Controle Financeiro</h1>
+            <div class="profile">
+                <a href="perfil.html">Perfil</a>
+            </div>
+        </header>
+
+        <div class="control-panel">
+            <button id="adicionarReceita"><a href="./adicionar_receita.html">Adicionar Receita</a></button>
+            <button id="editarReceita"><a href="./editar_receita.html">Editar Receita</a></button>
+            <button id="adicionarDespesa"><a href="./adicionar_despesa.html">Adicionar Despesa</a></button>
+            <button id="editarDespesa"><a href="./editar_despesa.html">Editar Despesa</a></button>
+            <button id="relatorio">Gerar Relatório</button>
+        </div>
+
+        <div class="summary">
+            <div class="box" id="mostraReceita">
+                <h2>Receitas</h2>
+                <p></p>
+            </div>
+            <div class="box" id="mostraDespesa">
+                <h2>Despesas</h2>
+                <p></p>
+            </div>
+            <div class="box" id="mostraSaldo">
+                <h2>Saldo</h2>
+                <p></p>
+            </div>
+        </div>
+
+        <table id="dataTable">
+            <thead>
+                <tr>
+                    <th>Data</th>
+                    <th>Descrição</th>
+                    <th>Categoria</th>
+                    <th>Meio Pagamento</th>
+                    <th>Valor</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+
+    <script src="../script/valida_token.js"></script>
+    <script src="./scripts/busca_conta.js"></script>
+    <script src="./scripts/soma_despesas.js"></script>
+    <script src="./scripts/soma_receitas.js"></script>
+    <script src="./scripts/busca_dados.js"></script>
+    <script src="./scripts/valida_id.js"></script>
+</body>
+</html>

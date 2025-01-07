@@ -1,0 +1,125 @@
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  width: 80%;
+  margin: auto;
+  overflow: hidden;
+}
+
+header {
+  background: #333;
+  color: #fff;
+  padding-top: 30px;
+  min-height: 70px;
+  border-bottom: #77aaff 3px solid;
+  position: relative;
+}
+
+header h1 {
+  text-align: center;
+  margin: 0;
+  font-size: 24px;
+}
+
+header .profile {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+}
+
+header .profile a {
+  color: #fff;
+  text-decoration: none;
+  font-size: 18px;
+  padding: 5px 10px;
+  border: 1px solid #fff;
+  border-radius: 5px;
+  transition: background 0.3s, color 0.3s;
+}
+
+header .profile a:hover {
+  background: #fff;
+  color: #333;
+}
+
+.control-panel {
+  text-align: center;
+  margin: 20px 0;
+}
+
+.control-panel button {
+  background: #77aaff;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  margin: 5px;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background 0.3s;
+}
+
+.control-panel button:hover {
+  background: #0056b3;
+}
+
+.control-panel button a {
+  text-decoration: none;
+  color: #fff;
+}
+
+.summary {
+  display: flex;
+  justify-content: space-around;
+  margin: 20px 0;
+}
+
+.summary .box {
+  background: #fff;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  width: 45%;
+  text-align: center;
+}
+
+.summary .box h2 {
+  margin: 0 0 10px;
+}
+
+#dataTable {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px 0;
+}
+
+#dataTable th, #dataTable td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: center; /* Centraliza o texto */
+}
+
+#dataTable th {
+  background: #77aaff;
+  color: #fff;
+}
+
+#dataTable tr:nth-child(even) {
+  background: #f2f2f2;
+}
+
+#dataTable tr:hover {
+  background: #ddd;
+}
+
+#dataTable tr {
+  cursor: pointer; /* Torna as linhas selecionáveis */
+}
+
+#dataTable tr.selected {
+  background: #aaf; /* Cor de fundo para a linha selecionada */
+}

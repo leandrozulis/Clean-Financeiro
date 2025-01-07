@@ -1,0 +1,68 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: linear-gradient(135deg, #0e141a, #040707);
+}
+
+.login-container {
+  background-color: #fff;
+  padding: 20px 50px 20px 30px;
+  border-radius: 10px;
+  box-shadow: 3px 4px 5px rgba(245, 237, 237, 0.87);
+  width: 300px;
+  text-align: center;
+  display: none; /* Esconde por padrão */
+}
+
+.login-container.active {
+  display: block; /* Mostra quando a classe 'active' é adicionada */
+}
+
+.login-container h1 {
+  margin-bottom: 20px;
+  color: #333;
+  text-align: center;
+}
+
+.login-container input {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+.login-container button {
+  width: 100%;
+  padding: 10px;
+  background-color: #4facfe;
+  border: none;
+  border-radius: 5px;
+  color: #fff;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  margin: 10px;
+}
+
+.login-container button:hover {
+  background-color: #182327;
+}
+
+.login-container a {
+  display: block;
+  margin-top: 15px;
+  color: #4facfe;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.login-container a:hover {
+  text-decoration: underline;
+}

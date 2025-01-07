@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tela de Login</title>
+    <link rel="stylesheet" href="style/index.css">
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</head>
+<body>
+    <div class="login-container active" id="loginForm">
+        <h1>Login</h1>
+        <form id="loginFormElement">
+            <input type="email" name="email" placeholder="Email" id="email" required>
+            <input type="password" name="password" placeholder="Senha" id="password" required>
+            <button type="submit">Entrar</button>
+        </form>
+        <a href="#" id="showRefectorPassword">Esqueceu a senha?</a>
+        <a href="#" id="showRegister">Criar uma conta</a>
+    </div>
+
+    <div class="login-container" id="registerForm">
+        <h1>Formulário de cadastro</h1>
+        <form action="#" method="post">
+            <input type="text" name="nomeCadastro" id="nomeCadastro" placeholder="Nome Completo..">
+            <input type="email" name="emailCadastro" id="emailCadastro" placeholder="email@email.com">
+            <input type="password" name="senhaCadastro" id="senhaCadastro" placeholder="*******">
+            <input type="password" name="confirmaSenhaCadastro" id="confirmaSenhaCadastro" placeholder="*******">
+            <button type="submit">Cadastrar</button>
+        </form>
+        <a href="#" id="showLogin">Voltar para Login</a>
+    </div>
+
+    <div class="login-container" id="refectorPasswordForm">
+        <h1>Recuperação de Senha</h1>
+        <form action="#" method="post">
+            <input type="email" name="emailRecuperacaoCadastro" id="emailRecuperacaoCadastro" placeholder="email@email.com">
+            <button type="submit">Recuperar</button>
+        </form>
+        <a href="#" id="showLogin">Voltar para Login</a>
+    </div>
+
+    <script src="./scripts/opcoes_login.js"></script>
+    <script src="./scripts/chamada_login.js"></script>
+</body>
+</html>

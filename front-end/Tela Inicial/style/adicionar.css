@@ -1,0 +1,109 @@
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  width: 80%;
+  margin: auto;
+  overflow: hidden;
+}
+
+header {
+  background: #333;
+  color: #fff;
+  padding-top: 30px;
+  min-height: 70px;
+  border-bottom: #77aaff 3px solid;
+  position: relative;
+}
+
+header h1 {
+  text-align: center;
+  margin: 0;
+  font-size: 24px;
+}
+
+header .cabecalho {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+}
+
+header .cabecalho a {
+  color: #fff;
+  text-decoration: none;
+  font-size: 18px;
+  padding: 5px 10px;
+  border: 1px solid #fff;
+  border-radius: 5px;
+  transition: background 0.3s, color 0.3s;
+}
+
+header .cabecalho a:hover {
+  background: #fff;
+  color: #333;
+}
+
+.receita-details {
+  background: #fff;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  margin-top: 20px;
+}
+
+.receita-details h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  box-sizing: border-box;
+}
+
+.form-group.buttons {
+  text-align: center;
+}
+
+.form-group .btn {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin: 5px;
+  transition: background 0.3s;
+}
+
+.form-group .btn-add {
+  background-color: #28a745;
+  color: white;
+}
+
+.form-group .btn-add:hover {
+  background-color: #218838;
+}
+
+.form-group .btn-clear {
+  background-color: #dc3545;
+  color: white;
+}
+
+.form-group .btn-clear:hover {
+  background-color: #c82333;
+}

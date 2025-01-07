@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Receita - Controle Financeiro</title>
+    <link rel="stylesheet" href="./style/adicionar.css">
+</head>
+<body>
+  <div class="container">
+      <header>
+          <h1>Adicionar Receita</h1>
+          <div class="cabecalho">
+              <a href="tela_inicial.html">Voltar</a>
+          </div>
+      </header>
+
+      <div class="receita-details">
+          <h2>Inclusão de Receita:</h2>
+          <form id="profileForm">
+              <div class="form-group">
+                  <label for="descricao">Descrição:</label>
+                  <input type="text" id="descricao" name="descricao">
+              </div>
+              <div class="form-group">
+                  <label for="meioPagamento">Meio de Pagamento:</label>
+                  <input type="text" id="meioPagamento" name="meioPagamento">
+              </div>
+              <div class="form-group">
+                  <label for="valor">Valor (+):</label>
+                  <input type="text" id="valor" name="valor">
+              </div>
+              <div class="form-group buttons">
+                  <button type="submit" class="btn btn-add" id="adicionarReceita">Adicionar</button>
+                  <button type="reset" class="btn btn-clear">Limpar Dados</button>
+              </div>
+          </form>
+      </div>
+  </div>
+
+  <script src="../script/valida_token.js"></script>
+  <script src="./scripts/adicionar_receita.js"></script>
+</body>
+</html>

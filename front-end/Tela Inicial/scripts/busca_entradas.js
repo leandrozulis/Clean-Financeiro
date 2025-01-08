@@ -1,6 +1,6 @@
 async function apresentaEntrada() {
   try {
-    const response = await fetch(`http://localhost:2578/find/entradas?token=784faf47-6ef0-4bef-9d0b-7a28558067d6`, {
+    const response = await fetch(`http://localhost:2578/find/entradas?token=${localStorage.getItem('tokenConta')}`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',

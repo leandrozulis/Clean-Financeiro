@@ -18,7 +18,7 @@ adicionarReceita.addEventListener('click', async (e) => {
 
 async function registrarReceita() {
   try {
-    const response = await fetch(`http://localhost:2578/register/entrada?token=784faf47-6ef0-4bef-9d0b-7a28558067d6`, {
+    const response = await fetch(`http://localhost:2578/register/entrada?token=${localStorage.getItem('tokenConta')}`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

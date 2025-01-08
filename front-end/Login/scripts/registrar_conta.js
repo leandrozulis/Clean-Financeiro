@@ -4,9 +4,9 @@ cadastrarConta.addEventListener('click', async (e) => {
 
   e.preventDefault();
 
-  const nome = document.getElementById('nome').value;
-  const email = document.getElementById('email').value;
-  const senha = document.getElementById('senha').value;
+  const nome = document.getElementById('nomeCadastro').value;
+  const email = document.getElementById('emailCadastro').value;
+  const senha = document.getElementById('senhaCadastro').value;
   const confirmaSenhaCadastro = document.getElementById('confirmaSenhaCadastro').value;
 
   if (senha !== confirmaSenhaCadastro) {
@@ -26,6 +26,7 @@ cadastrarConta.addEventListener('click', async (e) => {
     if (response.ok) {
 
       await response.json();
+      alert('Conta cadastrada com sucesso!');
       window.location.href = './index.html';
 
     } else {

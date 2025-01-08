@@ -27,7 +27,8 @@ export class AuthController {
 
       return reply.status(200).send({
         message: 'Login Realizado!',
-        token: (await accessToken).toString()
+        token: (await accessToken).toString(),
+        tokenConta: account.token
       })
 
     } catch (error: any) {

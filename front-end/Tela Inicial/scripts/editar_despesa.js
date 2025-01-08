@@ -35,7 +35,7 @@ editarDespesa.addEventListener('click', async (e) => {
 
 async function atualizarDespesa() {
   try {
-    const response = await fetch(`http://localhost:2578/atualiza/saida/${selectedRowId}?token=784faf47-6ef0-4bef-9d0b-7a28558067d6`, {
+    const response = await fetch(`http://localhost:2578/atualiza/saida/${selectedRowId}?token=${localStorage.getItem('tokenConta')}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
@@ -66,7 +66,7 @@ async function atualizarDespesa() {
 
 async function buscaDadosSaida() {
   try {
-    const response = await fetch(`http://localhost:2578/saida/${selectedRowId}?token=784faf47-6ef0-4bef-9d0b-7a28558067d6`, {
+    const response = await fetch(`http://localhost:2578/saida/${selectedRowId}?token=${localStorage.getItem('tokenConta')}`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',

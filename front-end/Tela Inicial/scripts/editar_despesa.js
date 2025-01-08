@@ -16,9 +16,6 @@ editarDespesa.addEventListener('click', async (e) => {
 
   const saida = await atualizarDespesa();
 
-  console.log('saida', saida);
-  
-
   if (saida === null) {
     window.location.href = './tela_inicial.html';
     alert('Despesa não encontrada.');
@@ -27,6 +24,7 @@ editarDespesa.addEventListener('click', async (e) => {
 
   if (saida) {
     alert('Despesa atualizada com sucesso!');
+    localStorage.removeItem('selectedRowId');
     window.location.href = './tela_inicial.html';
   } else {
     alert('Erro ao atualizar despesa.');

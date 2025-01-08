@@ -1,4 +1,3 @@
-// const tableBody = document.querySelector('#dataTable tbody');
 const mostraDespesa = document.querySelector('#mostraDespesa p');
 const mostraReceita = document.querySelector('#mostraReceita p');
 const mostraSaldo = document.querySelector('#mostraSaldo p');
@@ -54,13 +53,36 @@ async function carregarDados() {
   retornoDadosLista(todosDados);
 }
 
+document.addEventListener('click', function(event) {
+  const tabela = document.querySelector('table');
+  const linhas = tabela.querySelectorAll('tr');
+
+  const acoes = [
+    document.querySelector('#editarReceita'),
+    document.querySelector('#editarDespesa'),
+  ];
+
+  let clicouNaLinha = false;
+  let clicouNaAcao = acoes.some(acao => acao.contains(event.target));
+
+  linhas.forEach(function(linha) {
+    if (linha.contains(event.target)) {
+      clicouNaLinha = true;
+    }
+  });
+
+  if (!clicouNaLinha && !clicouNaAcao) {
+    localStorage.removeItem('selectedRowId');
+  }
+});
+
 async function retornoDadosLista(data) {
   const tableBody = document.querySelector('#dataTable tbody');
   tableBody.innerHTML = '';
 
   data.forEach((item) => {
     const row = document.createElement('tr');
-    row.dataset.id = item.id; // Adiciona o ID como um atributo de dados
+    row.dataset.id = item.id;
 
     row.innerHTML = `
         <td>${new Date(item.dtcadastro).toLocaleString('pt-BR')}</td>
@@ -70,20 +92,16 @@ async function retornoDadosLista(data) {
         <td>${item.valor.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</td>
     `;
 
-    // Adiciona o evento de clique à linha
     row.addEventListener('click', function(event) {
-      // Impede que o clique na linha propague para o documento
+
       event.stopPropagation();
 
-      // Remove a classe 'selected' de todas as linhas
       const rows = tableBody.getElementsByTagName('tr');
       for (let i = 0; i < rows.length; i++) {
         rows[i].classList.remove('selected');
       }
-      // Adiciona a classe 'selected' à linha clicada
       this.classList.add('selected');
 
-      // Armazena o ID da linha selecionada no localStorage
       localStorage.setItem('selectedRowId', this.dataset.id);
     });
 
@@ -91,12 +109,10 @@ async function retornoDadosLista(data) {
   });
 }
 
-// Adiciona um evento de clique ao documento para desselecionar as linhas
 document.addEventListener('click', function() {
   const rows = document.querySelectorAll('#dataTable tbody tr');
   rows.forEach(row => row.classList.remove('selected'));
 
-  // Remove a seleção de texto
   const selection = window.getSelection();
   selection.removeAllRanges();
 
@@ -116,6 +132,7 @@ window.onload = function () {
   } else if (!isValid) {
     logoutUser();
   } else {
+    localStorage.removeItem('selectedRowId');
     carregarDados();
     carregarSaldo();
     somaDespesas();

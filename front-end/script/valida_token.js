@@ -28,6 +28,7 @@ function setupAutoLogout() {
 
 function logoutUser() {
   localStorage.removeItem('token');
+  localStorage.removeItem('tokenConta');
   localStorage.removeItem('expiresAt');
   alert('Sua sessão expirou. Por favor, faça login novamente.');
   window.location.href = '../Login/index.html'; // Ajuste o caminho conforme sua estrutura

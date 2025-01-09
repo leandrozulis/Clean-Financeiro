@@ -18,8 +18,10 @@
         <div class="control-panel">
             <button id="adicionarReceita"><a href="./adicionar_receita.html">Adicionar Receita</a></button>
             <button id="editarReceita"><a href="./editar_receita.html">Editar Receita</a></button>
+            <button id="excluirReceita">Excluir Receita</a></button>
             <button id="adicionarDespesa"><a href="./adicionar_despesa.html">Adicionar Despesa</a></button>
             <button id="editarDespesa"><a href="./editar_despesa.html">Editar Despesa</a></button>
+            <button id="excluirDespesa">Excluir Despesa</a></button>
             <button id="relatorio">Gerar Relatório</button>
         </div>
 
@@ -50,13 +52,27 @@
             </thead>
             <tbody></tbody>
         </table>
+
+        <div id="confirmationModal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <p>Você realmente quer excluir este registro?</p>
+                <button id="confirmDelete">Sim</button>
+                <button id="cancelDelete">Não</button>
+            </div>
+        </div>
     </div>
 
     <script src="../script/valida_token.js"></script>
-    <script src="./scripts/busca_conta.js"></script>
-    <script src="./scripts/soma_despesas.js"></script>
-    <script src="./scripts/soma_receitas.js"></script>
+    <script src="./scripts/Conta/busca_conta.js"></script>
+    <script src="./scripts/Saida/soma_despesas.js"></script>
+    <script src="./scripts/Entrada/soma_receitas.js"></script>
     <script src="./scripts/busca_dados.js"></script>
     <script src="./scripts/valida_id.js"></script>
+    <script src="./scripts/modal_exclusao.js"></script>
+    <script src="./scripts/Saida/busca_dados_despesa.js"></script>
+    <script src="./scripts/Saida/deletar_despesa.js"></script>
+    <script src="./scripts/Entrada/busca_dados_receita.js"></script>
+    <script src="./scripts/Entrada/deletar_receita.js"></script>
 </body>
 </html>

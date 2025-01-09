@@ -1,4 +1,3 @@
-const selectedRowId = localStorage.getItem('selectedRowId');
 const editarReceita = document.getElementById('editarReceita');
 
 const descricao = document.getElementById('descricao');
@@ -9,9 +8,22 @@ editarReceita.addEventListener('click', async (e) => {
 
   e.preventDefault();
 
+  if (valor.value <= 0 ) {
+    alert('O valor informado deve ser maior que 0.');
+    return;
+  }
+
   const entrada = await atualizarReceita();
+
+  if (entrada === null) {
+    window.location.href = './tela_inicial.html';
+    alert('Receita não encontrada.');
+    return;
+  }
+
   if (entrada) {
     alert('Receita atualizada com sucesso!');
+    localStorage.removeItem('selectedRowId');
     window.location.href = './tela_inicial.html';
   } else {
     alert('Erro ao atualizar receita.');
@@ -20,7 +32,8 @@ editarReceita.addEventListener('click', async (e) => {
 
 async function atualizarReceita() {
   try {
-    const response = await fetch(`http://localhost:2578/atualiza/entrada/${selectedRowId}?token=${localStorage.getItem('tokenConta')}`, {
+
+    const response = await fetch(`http://localhost:2578/atualiza/entrada/${localStorage.getItem('selectedRowId')}?token=${localStorage.getItem('tokenConta')}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
@@ -33,28 +46,12 @@ async function atualizarReceita() {
         "dtcadastro": data
       })
     });
-    
-    if (response.ok) {
-      const data = await response.json();
-      return data.entrada;
+
+    if (response.status === 400) {
+      window.location.href = './tela_inicial.html';
+      return null;
     }
-  } catch (err) {
-    console.error('Erro na requisição:', err);
-    alert('Erro ao conectar ao servidor.');
-  }
-}
-
-
-async function buscaDadosEntrada() {
-  try {
-    const response = await fetch(`http://localhost:2578/entrada/${selectedRowId}?token=${localStorage.getItem('tokenConta')}`, {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${localStorage.getItem('token')}`
-      }
-    });
-
+    
     if (response.ok) {
       const data = await response.json();
       return data.entrada;
@@ -69,6 +66,12 @@ let data = '';
 
 async function carregarEntrada() {
   const entrada = await buscaDadosEntrada();
+
+  if (entrada === null) {
+    window.location.href = './tela_inicial.html';
+    alert('Receita não encontrada.');
+    return;
+  }
 
   data = entrada.dtcadastro;
   

@@ -52,48 +52,66 @@ export class EntradaController {
 
   async getByEntrada(req: FastifyRequest, reply: FastifyReply) {
 
-    const { entradaId }: ConsultaEntradaDto = consultaEntradaDto.parse(req.params)
-    const { token }: ValidatedToken = validatedToken.parse(req.query)
+    try {
+      const { entradaId }: ConsultaEntradaDto = consultaEntradaDto.parse(req.params)
+      const { token }: ValidatedToken = validatedToken.parse(req.query)
 
-    const { entrada } = await this.getByEntradaUseCase.execute({
-      entradaId,
-      token
-    })
+      const { entrada } = await this.getByEntradaUseCase.execute({
+        entradaId,
+        token
+      })
 
-    reply.status(200).send({
-      entrada: EntradaView.getByEntrada(entrada)
-    })
+      reply.status(200).send({
+        entrada: EntradaView.getByEntrada(entrada)
+      })
+    } catch (error) {
+      reply.status(400).send({
+        message: error.message
+      })
+    }
   }
 
   async updateEntrada(req: FastifyRequest, reply: FastifyReply) {
 
-    const { entradaId }: IdEntradaDto = idEntradaDto.parse(req.params)
-    const { valor, descricao, meioPagamento }: UpdateEntradaDTO = updateEntradaDTO.parse(req.body)
-    const { token }: ValidatedToken = validatedToken.parse(req.query)
+    try {
+      const { entradaId }: IdEntradaDto = idEntradaDto.parse(req.params)
+      const { valor, descricao, meioPagamento }: UpdateEntradaDTO = updateEntradaDTO.parse(req.body)
+      const { token }: ValidatedToken = validatedToken.parse(req.query)
 
-    const { entrada } = await this.updateEntradaUseCase.execute({
-      entradaId,
-      token,
-      valor,
-      descricao,
-      meioPagamento
-    })
+      const { entrada } = await this.updateEntradaUseCase.execute({
+        entradaId,
+        token,
+        valor,
+        descricao,
+        meioPagamento
+      })
 
-    reply.status(201).send({
-      entrada: EntradaView.retEntrada(entrada)
-    })
+      reply.status(201).send({
+        entrada: EntradaView.retEntrada(entrada)
+      })
+    } catch (error) {
+      reply.status(400).send({
+        message: error.message
+      })
+    }
 
   }
 
   async getManyEntradas(req: FastifyRequest, reply: FastifyReply) {
 
-    const { token }: ValidatedToken = validatedToken.parse(req.query)
-    const { entradas } = await this.getManyEntradasUseCase.execute({
-      token
-    })
+    try {
+      const { token }: ValidatedToken = validatedToken.parse(req.query)
+      const { entradas } = await this.getManyEntradasUseCase.execute({
+        token
+      })
 
-    reply.status(200).send({
-      entrada: EntradaView.getAllEntradas(entradas)
-    })
+      reply.status(200).send({
+        entrada: EntradaView.getAllEntradas(entradas)
+      })
+    } catch (error) {
+      reply.status(400).send({
+        message: error.message
+      })
+    }
   }
 }

@@ -7,6 +7,11 @@ adicionarDespesa.addEventListener('click', async (e) => {
 
   e.preventDefault();
 
+  if (valor.value <= 0 ) {
+    alert('O valor informado deve ser maior que 0.');
+    return;
+  }
+
   const saida = await registrarDespesa();
   if (saida) {
     alert('Despesa adicionada com sucesso!');
@@ -18,6 +23,7 @@ adicionarDespesa.addEventListener('click', async (e) => {
 
 async function registrarDespesa() {
   try {
+
     const response = await fetch(`http://localhost:2578/register/saida?token=${localStorage.getItem('tokenConta')}`, {
       method: 'POST',
       headers: {

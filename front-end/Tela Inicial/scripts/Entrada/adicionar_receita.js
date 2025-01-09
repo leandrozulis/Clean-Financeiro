@@ -7,6 +7,11 @@ adicionarReceita.addEventListener('click', async (e) => {
 
   e.preventDefault();
 
+  if (valor.value <= 0 ) {
+    alert('O valor informado deve ser maior que 0.');
+    return;
+  }
+
   const entrada = await registrarReceita();
   if (entrada) {
     alert('Receita adicionada com sucesso!');
@@ -17,6 +22,7 @@ adicionarReceita.addEventListener('click', async (e) => {
 });
 
 async function registrarReceita() {
+
   try {
     const response = await fetch(`http://localhost:2578/register/entrada?token=${localStorage.getItem('tokenConta')}`, {
       method: 'POST',

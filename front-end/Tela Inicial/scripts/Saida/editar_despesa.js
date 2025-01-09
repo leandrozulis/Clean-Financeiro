@@ -1,4 +1,3 @@
-const selectedRowId = localStorage.getItem('selectedRowId');
 const editarDespesa = document.getElementById('editarDespesa');
 
 const descricao = document.getElementById('descricao');
@@ -9,8 +8,8 @@ editarDespesa.addEventListener('click', async (e) => {
 
   e.preventDefault();
 
-  if (selectedRowId === null) {
-    alert('Selecione uma despesa para editar.');
+  if (valor.value <= 0 ) {
+    alert('O valor informado deve ser maior que 0.');
     return;
   }
 
@@ -33,7 +32,8 @@ editarDespesa.addEventListener('click', async (e) => {
 
 async function atualizarDespesa() {
   try {
-    const response = await fetch(`http://localhost:2578/atualiza/saida/${selectedRowId}?token=${localStorage.getItem('tokenConta')}`, {
+
+    const response = await fetch(`http://localhost:2578/atualiza/saida/${localStorage.getItem('selectedRowId')}?token=${localStorage.getItem('tokenConta')}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
@@ -56,32 +56,6 @@ async function atualizarDespesa() {
       const data = await response.json();
       return data.saida;
     }
-  } catch (err) {
-    console.error('Erro na requisição:', err);
-    alert('Erro ao conectar ao servidor.');
-  }
-}
-
-async function buscaDadosSaida() {
-  try {
-    const response = await fetch(`http://localhost:2578/saida/${selectedRowId}?token=${localStorage.getItem('tokenConta')}`, {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${localStorage.getItem('token')}`
-      }
-    });
-
-    if (response.status === 400) {
-      window.location.href = './tela_inicial.html';
-      return null;
-    }
-
-    if (response.ok) {
-      const data = await response.json();
-      return data.saida;
-    }   
-
   } catch (err) {
     console.error('Erro na requisição:', err);
     alert('Erro ao conectar ao servidor.');

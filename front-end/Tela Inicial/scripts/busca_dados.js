@@ -85,11 +85,11 @@ async function retornoDadosLista(data) {
     row.dataset.id = item.id;
 
     row.innerHTML = `
-        <td>${new Date(item.dtcadastro).toLocaleString('pt-BR')}</td>
-        <td>${item.descricao}</td>
         <td>${item.tipo}</td>
-        <td>${item.meioPagamento}</td>
+        <td>${item.descricao}</td>
         <td>${item.valor.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</td>
+        <td>${item.meioPagamento}</td>
+        <td>${new Date(item.dtcadastro).toLocaleString('pt-BR')}</td>
     `;
 
     row.addEventListener('click', function(event) {

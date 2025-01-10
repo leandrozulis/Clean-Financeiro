@@ -1,10 +1,8 @@
-const editarReceita = document.getElementById('editarReceita');
-
 const descricao = document.getElementById('descricao');
 const meioPagamento = document.getElementById('meioPagamento');
 const valor = document.getElementById('valor');
 
-editarReceita.addEventListener('click', async (e) => {
+document.getElementById('profileForm').addEventListener('submit', async (e) => {
 
   e.preventDefault();
 

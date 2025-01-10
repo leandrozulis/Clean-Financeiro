@@ -4,7 +4,7 @@ const descricao = document.getElementById('descricao');
 const meioPagamento = document.getElementById('meioPagamento');
 const valor = document.getElementById('valor');
 
-editarDespesa.addEventListener('click', async (e) => {
+document.getElementById('profileFormDespesa').addEventListener('submit', async (e) => {
 
   e.preventDefault();
 

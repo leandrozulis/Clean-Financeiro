@@ -18,7 +18,7 @@ adicionarDespesa.addEventListener('click', async (e) => {
       window.location.href = './tela_inicial.html';
     });
   } else {
-    exibeError('Erro ao registrar Despesa.');
+    exibeError('A conta não contem valor para Saque!');
   }
 });
 

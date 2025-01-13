@@ -10,7 +10,7 @@ app.register(cors)
 app.register(fastifyJwt, {
   secret: 'supersecret',
   sign: {
-    expiresIn: '10m'
+    expiresIn: '1h'
   }
 })
 

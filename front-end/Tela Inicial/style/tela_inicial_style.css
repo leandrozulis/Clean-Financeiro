@@ -85,10 +85,15 @@ header .profile a:hover {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   width: 45%;
   text-align: center;
+  font-weight: bolder;
 }
 
 .summary .box h2 {
   margin: 0 0 10px;
+}
+
+.summary .box p {
+  font-size: 30px;
 }
 
 #dataTable {
@@ -100,7 +105,7 @@ header .profile a:hover {
 #dataTable th, #dataTable td {
   border: 1px solid #ddd;
   padding: 8px;
-  text-align: center; /* Centraliza o texto */
+  text-align: center;
 }
 
 #dataTable th {
@@ -117,15 +122,16 @@ header .profile a:hover {
 }
 
 #dataTable tr {
-  cursor: pointer; /* Torna as linhas selecionáveis */
+  cursor: pointer;
+  font-weight: 600;
 }
 
 #dataTable tr.selectedgreen {
-  background: rgb(134, 220, 134); /* Cor de fundo para a linha selecionada */
+  background: rgb(134, 220, 134);
 }
 
 #dataTable tr.selectedred {
-  background: rgb(239, 118, 118) /* Cor de fundo para a linha selecionada */
+  background: rgb(239, 118, 118);
 }
 
 #dataTable tr.linegreen {

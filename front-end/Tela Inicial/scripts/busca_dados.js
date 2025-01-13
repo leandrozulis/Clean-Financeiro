@@ -72,6 +72,15 @@ document.addEventListener('click', function(event) {
   });
 
   if (!clicouNaLinha && !clicouNaAcao) {
+    linhas.forEach(function(linha) {
+      if (linha.classList.contains('selectedgreen')) {
+        linha.classList.remove('selectedgreen');
+        linha.classList.add('linegreen');
+      } else if (linha.classList.contains('selectedred')) {
+        linha.classList.remove('selectedred');
+        linha.classList.add('linered');
+      }
+    });
     localStorage.removeItem('selectedRowId');
   }
 });
@@ -97,31 +106,17 @@ async function retornoDadosLista(data) {
     `;
 
     row.addEventListener('click', function(event) {
-
       event.stopPropagation();
 
-      const rows = tableBody.getElementsByTagName('tr');
-      for (let i = 0; i < rows.length; i++) {
-        if (rows[i].classList.contains('linegreen')) {
-          rows[i].classList.remove('selectedgreen');
-        } else if (rows[i].classList.contains('linered')) {
-          rows[i].classList.remove('selectedred');
-        }
+      if (this.classList.contains('linegreen')) {
+        this.classList.add('selectedgreen');
+        this.classList.remove('linegreen');
+      } 
+      
+      if (this.classList.contains('linered')) {
+        this.classList.add('selectedred');
+        this.classList.remove('linered');
       }
-
-      if (row.classList.contains('linegreen')) {
-          if (row.classList.contains('selectedgreen')) {
-              row.classList.remove('selectedgreen');
-          } else {
-              row.classList.add('selectedgreen');
-          }
-        } else if (row.classList.contains('linered')) {
-          if (row.classList.contains('selectedred')) {
-              row.classList.remove('selectedred');
-          } else {
-              row.classList.add('selectedred');
-          }
-        }
 
       localStorage.setItem('selectedRowId', this.dataset.id);
     });

@@ -121,11 +121,11 @@ header .profile a:hover {
 }
 
 #dataTable tr.selectedgreen {
-  background: rgb(162, 223, 162); /* Cor de fundo para a linha selecionada */
+  background: rgb(134, 220, 134); /* Cor de fundo para a linha selecionada */
 }
 
 #dataTable tr.selectedred {
-  background: rgb(238, 144, 144) /* Cor de fundo para a linha selecionada */
+  background: rgb(239, 118, 118) /* Cor de fundo para a linha selecionada */
 }
 
 #dataTable tr.linegreen {

@@ -9,7 +9,7 @@ document.getElementById('profileFormDespesa').addEventListener('submit', async (
   e.preventDefault();
 
   if (valor.value <= 0 ) {
-    alert('O valor informado deve ser maior que 0.');
+    exibeError('O valor informado deve ser maior que 0.');
     return;
   }
 
@@ -17,16 +17,17 @@ document.getElementById('profileFormDespesa').addEventListener('submit', async (
 
   if (saida === null) {
     window.location.href = './tela_inicial.html';
-    alert('Despesa não encontrada.');
+    exibeError('Despesa não encontrada.');
     return;
   }
 
   if (saida) {
-    alert('Despesa atualizada com sucesso!');
-    localStorage.removeItem('selectedRowId');
-    window.location.href = './tela_inicial.html';
+    exibeSucesso('Despesa atualizada com sucesso!').then(() => {
+      localStorage.removeItem('selectedRowId');
+      window.location.href = './tela_inicial.html';
+    });
   } else {
-    alert('Erro ao atualizar despesa.');
+    exibeError('Erro ao atualizar despesa.');
   }
 });
 
@@ -57,8 +58,7 @@ async function atualizarDespesa() {
       return data.saida;
     }
   } catch (err) {
-    console.error('Erro na requisição:', err);
-    alert('Erro ao conectar ao servidor.');
+    exibeError('Erro ao conectar ao servidor.');
   }
 }
 
@@ -69,7 +69,7 @@ async function carregarSaida() {
 
   if (saida === null) {
     window.location.href = './tela_inicial.html';
-    alert('Despesa não encontrada.');
+    exibeError('Despesa não encontrada.');
     return;
   }
 

@@ -7,7 +7,7 @@ document.getElementById('profileForm').addEventListener('submit', async (e) => {
   e.preventDefault();
 
   if (valor.value <= 0 ) {
-    alert('O valor informado deve ser maior que 0.');
+    exibeError('O valor informado deve ser maior que 0.');
     return;
   }
 
@@ -15,16 +15,17 @@ document.getElementById('profileForm').addEventListener('submit', async (e) => {
 
   if (entrada === null) {
     window.location.href = './tela_inicial.html';
-    alert('Receita não encontrada.');
+    exibeError('Receita não encontrada.');
     return;
   }
 
   if (entrada) {
-    alert('Receita atualizada com sucesso!');
-    localStorage.removeItem('selectedRowId');
-    window.location.href = './tela_inicial.html';
+    exibeSucesso('Receita atualizada com sucesso!').then(() => {
+      localStorage.removeItem('selectedRowId');
+      window.location.href = './tela_inicial.html';
+    });
   } else {
-    alert('Erro ao atualizar receita.');
+    exibeError('Erro ao atualizar receita.');
   }
 });
 
@@ -55,8 +56,7 @@ async function atualizarReceita() {
       return data.entrada;
     }
   } catch (err) {
-    console.error('Erro na requisição:', err);
-    alert('Erro ao conectar ao servidor.');
+    exibeError('Erro ao conectar ao servidor.');
   }
 }
 
@@ -67,7 +67,7 @@ async function carregarEntrada() {
 
   if (entrada === null) {
     window.location.href = './tela_inicial.html';
-    alert('Receita não encontrada.');
+    exibeError('Receita não encontrada.');
     return;
   }
 

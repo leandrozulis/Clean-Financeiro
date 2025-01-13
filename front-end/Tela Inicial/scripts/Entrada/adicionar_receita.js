@@ -8,16 +8,17 @@ adicionarReceita.addEventListener('click', async (e) => {
   e.preventDefault();
 
   if (valor.value <= 0 ) {
-    alert('O valor informado deve ser maior que 0.');
+    exibeError('O valor informado deve ser maior que 0.');
     return;
   }
 
   const entrada = await registrarReceita();
   if (entrada) {
-    alert('Receita adicionada com sucesso!');
-    window.location.href = './tela_inicial.html';
+    exibeSucesso('Receita adicionada com sucesso!').then(() => {
+      window.location.href = './tela_inicial.html';
+    })
   } else {
-    alert('Erro ao registrar receita.');
+    exibeError('Erro ao registrar receita.');
   }
 });
 
@@ -42,8 +43,7 @@ async function registrarReceita() {
       return data.entrada;
     }
   } catch (err) {
-    console.error('Erro na requisição:', err);
-    alert('Erro ao conectar ao servidor.');
+    exibeError('Erro ao conectar ao servidor.');
   }
 }
 

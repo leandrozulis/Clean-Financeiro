@@ -16,7 +16,6 @@ async function deletarReceita() {
       return data.entrada;
     }
   } catch (err) {
-    console.error('Erro na requisição:', err);
-    alert('Erro ao conectar ao servidor.');
+    exibeError('Erro ao conectar ao servidor.');
   }
 }

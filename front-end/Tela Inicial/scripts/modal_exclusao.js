@@ -14,21 +14,21 @@ document.addEventListener('DOMContentLoaded', async () => {
       let entrada = await buscaDadosEntrada();
 
       if (!entrada) {
-        alert('Selecione uma receita para exclusão.');
+        exibeError('Selecione uma receita para exclusão.');
         return;
       }
 
       confirmDelete.onclick = async () => {
         await deletarReceita()
-        modal.style.display = 'none';
-        await buscaDadosEntrada();
-        alert('Receita excluída com sucesso!');
+        exibeSucesso('Receita excluída com sucesso!').then(async () => {
+          modal.style.display = 'none';
+          await buscaDadosEntrada();
+        });
       }
 
       modal.style.display = 'block';
     } catch (error) {
-      console.error('Erro ao buscar dados:', error);
-      alert('Ocorreu um erro ao tentar buscar os dados. Por favor, tente novamente.');
+      exibeError('Ocorreu um erro ao tentar buscar os dados. Por favor, tente novamente.');
     }
   });
 
@@ -40,21 +40,21 @@ document.addEventListener('DOMContentLoaded', async () => {
       let saida = await buscaDadosSaida();
 
       if (!saida) {
-        alert('Selecione uma despesa para exclusão.');
+        exibeError('Selecione uma despesa para exclusão.');
         return;
       }
 
       confirmDelete.onclick = async () => {
         await deletarDespesa()
-        modal.style.display = 'none';
-        await buscaDadosEntrada();
-        alert('Despesa excluída com sucesso!');
+        exibeSucesso('Despesa excluída com sucesso!').then(async () => {
+          modal.style.display = 'none';
+          await buscaDadosEntrada();
+        });
       }
 
       modal.style.display = 'block';
     } catch (error) {
-      console.error('Erro ao buscar dados:', error);
-      alert('Ocorreu um erro ao tentar buscar os dados. Por favor, tente novamente.');
+      exibeError('Ocorreu um erro ao tentar buscar os dados. Por favor, tente novamente.');
     }
   });
 

@@ -80,9 +80,13 @@ async function retornoDadosLista(data) {
   const tableBody = document.querySelector('#dataTable tbody');
   tableBody.innerHTML = '';
 
+  console.log(data);
+
   data.forEach((item) => {
     const row = document.createElement('tr');
     row.dataset.id = item.id;
+
+    item.tipo === 'Receitas' ? row.classList.add('linegreen') : row.classList.add('linered');
 
     row.innerHTML = `
         <td>${item.tipo}</td>
@@ -98,9 +102,26 @@ async function retornoDadosLista(data) {
 
       const rows = tableBody.getElementsByTagName('tr');
       for (let i = 0; i < rows.length; i++) {
-        rows[i].classList.remove('selected');
+        if (rows[i].classList.contains('linegreen')) {
+          rows[i].classList.remove('selectedgreen');
+        } else if (rows[i].classList.contains('linered')) {
+          rows[i].classList.remove('selectedred');
+        }
       }
-      this.classList.add('selected');
+
+      if (row.classList.contains('linegreen')) {
+          if (row.classList.contains('selectedgreen')) {
+              row.classList.remove('selectedgreen');
+          } else {
+              row.classList.add('selectedgreen');
+          }
+        } else if (row.classList.contains('linered')) {
+          if (row.classList.contains('selectedred')) {
+              row.classList.remove('selectedred');
+          } else {
+              row.classList.add('selectedred');
+          }
+        }
 
       localStorage.setItem('selectedRowId', this.dataset.id);
     });

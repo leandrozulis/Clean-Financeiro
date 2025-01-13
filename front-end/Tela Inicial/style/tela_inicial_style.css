@@ -120,8 +120,20 @@ header .profile a:hover {
   cursor: pointer; /* Torna as linhas selecionáveis */
 }
 
-#dataTable tr.selected {
-  background: #aaf; /* Cor de fundo para a linha selecionada */
+#dataTable tr.selectedgreen {
+  background: rgb(162, 223, 162); /* Cor de fundo para a linha selecionada */
+}
+
+#dataTable tr.selectedred {
+  background: rgb(238, 144, 144) /* Cor de fundo para a linha selecionada */
+}
+
+#dataTable tr.linegreen {
+  background: rgb(194, 236, 194);
+}
+
+#dataTable tr.linered {
+  background: rgb(249, 186, 186);
 }
 
 .modal {

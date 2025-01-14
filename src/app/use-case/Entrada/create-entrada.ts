@@ -1,6 +1,9 @@
 import { EntradaSaldo } from "../../entities/Entrada-saldo"
 import { ContaRepository } from "../../repository/conta-repository"
 import { EntradaRepository } from "../../repository/entrada-repository"
+import { ErroAoRegistrarEntrada } from "./Erros/erro_ao_registrar_entrada"
+import { RegistroNaoEncontrado } from "./Erros/registro_nao_encontrado"
+import { ValorParaDeposito } from "./Erros/valor_para_deposito"
 
 interface EntradaSaldoUseCaseRequest {
   token: string
@@ -24,11 +27,11 @@ export class EntradaSaldoUseCase {
     const conta = await this.contaRepository.findByToken(token)
 
     if (!conta) {
-      throw new Error('Conta não localizada!')
+      throw new RegistroNaoEncontrado()
     }
 
     if (valor <= 0) {
-      throw new Error('O valor para depositório precisa ser maior que Zero!')
+      throw new ValorParaDeposito()
     }
 
     const newEntrada = new EntradaSaldo({
@@ -39,14 +42,16 @@ export class EntradaSaldoUseCase {
       meioPagamento
     })
 
-    await this.entradaRepository.register(newEntrada)
+    try {
+      await this.entradaRepository.register(newEntrada)
+      conta.entrada(valor)
+      await this.contaRepository.updateSaldo(conta.id, conta.saldo)
 
-    conta.entrada(valor)
-
-    await this.contaRepository.updateSaldo(conta.id, conta.saldo)
-
-    return {
-      newEntrada
+      return {
+        newEntrada
+      }
+    } catch (error) {
+      throw new ErroAoRegistrarEntrada()
     }
 
   }

@@ -21,16 +21,23 @@ export class EntradaController {
   ) { }
 
   async register(req: FastifyRequest, reply: FastifyReply) {
-    const { valor, descricao, meioPagamento }: CreateEntradaDTO = createEntradaDTO.parse(req.body)
-    const { token }: ValidatedToken = validatedToken.parse(req.query)
 
-    const { newEntrada } = await this.entradaSaldoUseCase.execute({
-      valor, descricao, meioPagamento, token
-    })
+    try {
+      const { valor, descricao, meioPagamento }: CreateEntradaDTO = createEntradaDTO.parse(req.body)
+      const { token }: ValidatedToken = validatedToken.parse(req.query)
 
-    reply.status(201).send({
-      entrada: EntradaView.createEntrada(newEntrada)
-    })
+      const { newEntrada } = await this.entradaSaldoUseCase.execute({
+        valor, descricao, meioPagamento, token
+      })
+
+      reply.status(201).send({
+        entrada: EntradaView.createEntrada(newEntrada)
+      })
+    } catch (error) {
+      reply.status(400).send({
+        message: error.message
+      })
+    }
   }
 
   async remove(req: FastifyRequest, reply: FastifyReply) {

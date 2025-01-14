@@ -43,7 +43,7 @@ async function registrarReceita() {
       return data.entrada;
     }
   } catch (err) {
-    exibeError('Erro ao conectar ao servidor.');
+    exibeError(err.message);
   }
 }
 

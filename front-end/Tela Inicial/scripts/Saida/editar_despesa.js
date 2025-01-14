@@ -13,14 +13,7 @@ document.getElementById('profileFormDespesa').addEventListener('submit', async (
     return;
   }
 
-  const saida = await atualizarDespesa();
-
-  if (saida === null) {
-    exibeError('Despesa não encontrada.').then(() => {
-      window.location.href = './tela_inicial.html';
-      return;
-    });
-  }
+  let saida = await atualizarDespesa();
 
   if (saida) {
     exibeSucesso('Despesa atualizada com sucesso!').then(() => {
@@ -48,18 +41,13 @@ async function atualizarDespesa() {
         "dtcadastro": data
       })
     });    
-
-    if (response.status === 400) {
-      window.location.href = './tela_inicial.html';
-      return null;
-    }
     
     if (response.ok) {
       const data = await response.json();
       return data.saida;
     }
   } catch (err) {
-    exibeError('Erro ao conectar ao servidor.');
+    exibeError(err.message);
   }
 }
 
@@ -68,10 +56,11 @@ let data = '';
 async function carregarSaida() {
   const saida = await buscaDadosSaida();
 
-  if (saida === null) {
-    window.location.href = './tela_inicial.html';
-    exibeError('Despesa não encontrada.');
-    return;
+  if (saida === undefined) {
+    exibeError('Despesa não encontrada.').then(() => {
+      window.location.href = './tela_inicial.html';
+      return;
+    });
   }
 
   data = saida.dtcadastro;

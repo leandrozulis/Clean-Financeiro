@@ -13,12 +13,6 @@ document.getElementById('profileForm').addEventListener('submit', async (e) => {
 
   const entrada = await atualizarReceita();
 
-  if (entrada === null) {
-    window.location.href = './tela_inicial.html';
-    exibeError('Receita não encontrada.');
-    return;
-  }
-
   if (entrada) {
     exibeSucesso('Receita atualizada com sucesso!').then(() => {
       localStorage.removeItem('selectedRowId');
@@ -45,11 +39,6 @@ async function atualizarReceita() {
         "dtcadastro": data
       })
     });
-
-    if (response.status === 400) {
-      window.location.href = './tela_inicial.html';
-      return null;
-    }
     
     if (response.ok) {
       const data = await response.json();
@@ -65,10 +54,11 @@ let data = '';
 async function carregarEntrada() {
   const entrada = await buscaDadosEntrada();
 
-  if (entrada === null) {
-    window.location.href = './tela_inicial.html';
-    exibeError('Receita não encontrada.');
-    return;
+  if (entrada === undefined) {
+    exibeError('Receita não encontrada.').then(() => {
+      window.location.href = './tela_inicial.html';
+      return;
+    });
   }
 
   data = entrada.dtcadastro;

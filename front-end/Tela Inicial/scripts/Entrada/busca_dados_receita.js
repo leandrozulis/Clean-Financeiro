@@ -8,11 +8,6 @@ async function buscaDadosEntrada() {
       }
     });
 
-    if (response.status === 400) {
-      window.location.href = './tela_inicial.html';
-      return null;
-    }
-
     if (response.ok) {
       const data = await response.json();
       return data.entrada;

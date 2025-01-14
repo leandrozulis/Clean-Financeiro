@@ -6,11 +6,6 @@ document.getElementById('profileForm').addEventListener('submit', async (e) => {
 
   e.preventDefault();
 
-  if (valor.value <= 0 ) {
-    exibeError('O valor informado deve ser maior que 0.');
-    return;
-  }
-
   const entrada = await atualizarReceita();
 
   if (entrada) {
@@ -18,8 +13,6 @@ document.getElementById('profileForm').addEventListener('submit', async (e) => {
       localStorage.removeItem('selectedRowId');
       window.location.href = './tela_inicial.html';
     });
-  } else {
-    exibeError('Erro ao atualizar receita.');
   }
 });
 
@@ -39,13 +32,18 @@ async function atualizarReceita() {
         "dtcadastro": data
       })
     });
+
+    if (response.status === 400) {
+      let res = await response.json()
+      exibeError(res.message);
+    }
     
     if (response.ok) {
       const data = await response.json();
       return data.entrada;
     }
   } catch (err) {
-    exibeError('Erro ao conectar ao servidor.');
+    exibeError(err.message);
   }
 }
 

@@ -1,6 +1,8 @@
 import { EntradaSaldo } from "../../entities/Entrada-saldo";
 import { ContaRepository } from "../../repository/conta-repository";
 import { EntradaRepository } from "../../repository/entrada-repository";
+import { RegistroNaoEncontrado } from "../Erros/registro_nao_encontrado";
+import { ValorParaDeposito } from "./Erros/valor_para_deposito";
 
 interface UpdateEntradaRequest {
   entradaId: string
@@ -26,13 +28,17 @@ export class UpdateEntradaUseCase {
     const conta = await this.contaRepository.findByToken(token)
 
     if (!conta) {
-      throw new Error('Conta não localizada!')
+      throw new RegistroNaoEncontrado()
     }
 
     const findEntrada = await this.entradaRepository.getById(entradaId)
 
     if (!findEntrada) {
-      throw new Error('Entrada não localizada!')
+      throw new RegistroNaoEncontrado()
+    }
+
+    if (valor === undefined || valor <= 0) {
+      throw new ValorParaDeposito()
     }
 
     const updatedValor = valor ?? findEntrada.valor;

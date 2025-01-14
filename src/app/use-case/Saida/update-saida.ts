@@ -1,6 +1,9 @@
 import { SaidaSaldo } from "../../entities/Saida-saldo";
 import { ContaRepository } from "../../repository/conta-repository";
 import { SaidaRepository } from "../../repository/saida-repository";
+import { RegistroNaoEncontrado } from "../Erros/registro_nao_encontrado";
+import { ValorMaiorQueOSaldo } from "./Erros/valor_maior_que_o_saldo";
+import { ValorParaSaque } from "./Erros/valor_para_saque";
 
 interface UpdateSaidaRequest {
   saidaId: string
@@ -26,13 +29,17 @@ export class UpdateSaidaUseCase {
     const conta = await this.contaRepository.findByToken(token)
 
     if (!conta) {
-      throw new Error('Conta não localizada!')
+      throw new RegistroNaoEncontrado()
     }
 
     const findSaida = await this.saidaRepository.getById(saidaId)
 
     if (!findSaida) {
-      throw new Error('Saida não localizada!')
+      throw new RegistroNaoEncontrado()
+    }
+
+    if (valor === undefined || valor <= 0) {
+      throw new ValorParaSaque()
     }
 
     const updatedValor = valor ?? findSaida.valor;
@@ -46,7 +53,7 @@ export class UpdateSaidaUseCase {
       let newValue = updatedValor - findSaida.valor
 
       if ((conta.saldo - newValue) < 0) {
-        throw new Error('A atualização do registro ultrapassa o valor disponível para Saque')
+        throw new ValorMaiorQueOSaldo()
       }
 
       conta.saida(newValue)

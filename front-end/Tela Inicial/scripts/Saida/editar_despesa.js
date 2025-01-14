@@ -8,11 +8,6 @@ document.getElementById('profileFormDespesa').addEventListener('submit', async (
 
   e.preventDefault();
 
-  if (valor.value <= 0 ) {
-    exibeError('O valor informado deve ser maior que 0.');
-    return;
-  }
-
   let saida = await atualizarDespesa();
 
   if (saida) {
@@ -20,8 +15,6 @@ document.getElementById('profileFormDespesa').addEventListener('submit', async (
       localStorage.removeItem('selectedRowId');
       window.location.href = './tela_inicial.html';
     });
-  } else {
-    exibeError('Erro ao atualizar despesa.');
   }
 });
 
@@ -41,6 +34,11 @@ async function atualizarDespesa() {
         "dtcadastro": data
       })
     });    
+
+    if (response.status === 400) {
+      let res = await response.json()
+      exibeError(res.message);
+    }
     
     if (response.ok) {
       const data = await response.json();

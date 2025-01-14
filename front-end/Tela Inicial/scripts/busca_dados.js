@@ -17,8 +17,7 @@ async function buscaDadosEntradas() {
       return data.entrada.map(item => ({ ...item, tipo: 'Receitas' }));
     }
   } catch (err) {
-    console.error('Erro na requisição:', err);
-    alert('Erro ao conectar ao servidor.');
+    ExibeError(err.message);
   }
 }
 
@@ -37,8 +36,7 @@ async function buscaDadosSaidas() {
       return data.saida.map(item => ({ ...item, tipo: 'Despesas' }));
     }
   } catch (err) {
-    console.error('Erro na requisição:', err);
-    alert('Erro ao conectar ao servidor.');
+    ExibeError(err.message);
   }
 }
 

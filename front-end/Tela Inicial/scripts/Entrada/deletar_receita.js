@@ -16,6 +16,6 @@ async function deletarReceita() {
       return data.entrada;
     }
   } catch (err) {
-    exibeError('Erro ao conectar ao servidor.');
+    exibeError(err.message);
   }
 }

@@ -17,8 +17,8 @@ async function buscaDadosEntrada() {
       const data = await response.json();
       return data.entrada;
     }
+    
   } catch (err) {
-    console.error('Erro na requisição:', err);
-    alert('Erro ao conectar ao servidor.');
+    ExibeError(err.message);   
   }
 }

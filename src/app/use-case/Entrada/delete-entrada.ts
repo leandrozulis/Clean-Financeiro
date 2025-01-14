@@ -1,6 +1,8 @@
 import { EntradaSaldo } from "../../entities/Entrada-saldo";
 import { ContaRepository } from "../../repository/conta-repository";
 import { EntradaRepository } from "../../repository/entrada-repository";
+import { ErroAoDeletarEntrada } from "./Erros/erro_ao_deletar_entrada";
+import { RegistroNaoEncontrado } from "../Erros/registro_nao_encontrado";
 
 interface DeleteEntradaUseCaseRequest {
   entradaId: string
@@ -24,19 +26,21 @@ export class DeleteEntradaUseCase {
     const conta = await this.contaRepository.findByToken(token)
 
     if (!conta) {
-      throw new Error('Conta não localizada')
+      throw new RegistroNaoEncontrado()
     }
 
     if (!entrada) {
-      throw new Error('Entrada não encontrada')
+      throw new RegistroNaoEncontrado()
     }
 
-    conta.saida(entrada.valor)
-
-    await this.contaRepository.updateSaldo(conta.id, conta.saldo)
-
-    return {
-      entrada
+    try {
+      conta.saida(entrada.valor)
+      await this.contaRepository.updateSaldo(conta.id, conta.saldo)
+      return {
+        entrada
+      }
+    } catch (error) {
+      throw new ErroAoDeletarEntrada()
     }
 
   }

@@ -16,9 +16,10 @@ document.getElementById('profileFormDespesa').addEventListener('submit', async (
   const saida = await atualizarDespesa();
 
   if (saida === null) {
-    window.location.href = './tela_inicial.html';
-    exibeError('Despesa não encontrada.');
-    return;
+    exibeError('Despesa não encontrada.').then(() => {
+      window.location.href = './tela_inicial.html';
+      return;
+    });
   }
 
   if (saida) {

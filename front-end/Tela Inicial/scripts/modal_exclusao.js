@@ -14,8 +14,8 @@ document.addEventListener('DOMContentLoaded', async () => {
       let entrada = await buscaDadosEntrada();
 
       if (!entrada) {
-        exibeError('Selecione uma receita para exclusão.');
-        return;
+        exibeError('Registro não encontrado!');
+        return
       }
 
       confirmDelete.onclick = async () => {
@@ -28,7 +28,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
       modal.style.display = 'block';
     } catch (error) {
-      exibeError('Ocorreu um erro ao tentar buscar os dados. Por favor, tente novamente.');
+      exibeError(error.message);
     }
   });
 
@@ -40,7 +40,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       let saida = await buscaDadosSaida();
 
       if (!saida) {
-        exibeError('Selecione uma despesa para exclusão.');
+        exibeError('Registro não encontrado!');
         return;
       }
 
@@ -54,7 +54,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
       modal.style.display = 'block';
     } catch (error) {
-      exibeError('Ocorreu um erro ao tentar buscar os dados. Por favor, tente novamente.');
+      exibeError(error.message);
     }
   });
 

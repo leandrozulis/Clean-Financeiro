@@ -42,19 +42,24 @@ export class EntradaController {
 
   async remove(req: FastifyRequest, reply: FastifyReply) {
 
-    const { entradaId }: DeleteEntradaDTO = deleteEntradaDTO.parse(req.body)
-    const { token }: ValidatedToken = validatedToken.parse(req.query)
+    try {
+      const { entradaId }: DeleteEntradaDTO = deleteEntradaDTO.parse(req.body)
+      const { token }: ValidatedToken = validatedToken.parse(req.query)
 
-    const { entrada } = await this.deleteEntradaUseCase.execute({
-      entradaId,
-      token
-    })
+      const { entrada } = await this.deleteEntradaUseCase.execute({
+        entradaId,
+        token
+      })
 
-    reply.status(200).send({
-      message: 'Entrada Deletada',
-      entrada: EntradaView.deleteEntrada(entrada)
-    })
-
+      reply.status(200).send({
+        message: 'Entrada Deletada',
+        entrada: EntradaView.deleteEntrada(entrada)
+      })
+    } catch (error) {
+      reply.status(400).send({
+        message: error.message
+      })
+    }
   }
 
   async getByEntrada(req: FastifyRequest, reply: FastifyReply) {

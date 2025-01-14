@@ -9,7 +9,7 @@ async function buscaDadosSaida() {
     });
 
     if (response.status === 400) {
-      window.location.href = './tela_inicial.html';
+      window.location.href = './tela_inicial.html';      
       return null;
     }
 
@@ -18,8 +18,7 @@ async function buscaDadosSaida() {
       return data.saida;
     }   
 
-  } catch (err) {
-    console.error('Erro na requisição:', err);
-    alert('Erro ao conectar ao servidor.');
+  } catch (err) {    
+    ExibeError(err.message);
   }
 }

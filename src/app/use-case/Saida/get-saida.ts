@@ -1,6 +1,7 @@
 import { SaidaSaldo } from "../../entities/Saida-saldo";
 import { ContaRepository } from "../../repository/conta-repository";
 import { SaidaRepository } from "../../repository/saida-repository";
+import { RegistroNaoEncontrado } from "../Erros/registro_nao_encontrado";
 
 interface GetBySaidaUseCaseRequest {
   saidaId: string
@@ -22,13 +23,13 @@ export class GetBySaidaUseCase {
     const conta = await this.contaRepository.findByToken(token)
 
     if (!conta) {
-      throw new Error('Conta não localizada!')
+      throw new RegistroNaoEncontrado()
     }
 
     const saida = await this.saidaRepository.getById(saidaId)
 
     if (!saida) {
-      throw new Error('Saida não localizada!')
+      throw new RegistroNaoEncontrado()
     }
 
     return {

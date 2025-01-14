@@ -2,7 +2,7 @@ import { EntradaSaldo } from "../../entities/Entrada-saldo"
 import { ContaRepository } from "../../repository/conta-repository"
 import { EntradaRepository } from "../../repository/entrada-repository"
 import { ErroAoRegistrarEntrada } from "./Erros/erro_ao_registrar_entrada"
-import { RegistroNaoEncontrado } from "./Erros/registro_nao_encontrado"
+import { RegistroNaoEncontrado } from "../Erros/registro_nao_encontrado"
 import { ValorParaDeposito } from "./Erros/valor_para_deposito"
 
 interface EntradaSaldoUseCaseRequest {

@@ -24,6 +24,7 @@ model Conta {
   dtatualizacao DateTime? @default(now())
   Entrada       Entrada[]
   Saida         Saida[]
+  Cartao        Cartao[]
 
   @@map("contas")
 }
@@ -52,4 +53,20 @@ model Saida {
   userId String
 
   @@map("saidas")
+}
+
+model Cartao {
+  id            String    @id @default(uuid())
+  limite        Float
+  descricao     String
+  nomeBanco     String
+  dtfechamento  String
+  dtvencimento  String
+  dtcadastro    DateTime  @default(now())
+  dtatualizacao DateTime? @default(now())
+
+  conta  Conta  @relation(fields: [userId], references: [id])
+  userId String
+
+  @@map("cartoes")
 }

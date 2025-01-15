@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', function() {
       const selectedRowId = localStorage.getItem('selectedRowId'); // Lê o valor mais recente
 
       if (!selectedRowId) {
-        alert('Selecione uma receita para editar.');
+        exibeAtencao('Selecione uma receita para editar.');
       } else {
         window.location.href = './editar_receita.html';
       }
@@ -23,7 +23,7 @@ document.addEventListener('DOMContentLoaded', function() {
       const selectedRowId = localStorage.getItem('selectedRowId'); // Lê o valor mais recente
 
       if (!selectedRowId) {
-        alert('Selecione uma despesa para editar.');
+        exibeAtencao('Selecione uma despesa para editar.');
       } else {
         window.location.href = './editar_despesa.html';
       }

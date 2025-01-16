@@ -17,12 +17,31 @@
         </header>
 
         <div class="control-panel">
-            <button id="adicionarReceita"><a href="./adicionar_receita.html">Adicionar Receita</a></button>
-            <button id="editarReceita"><a href="./editar_receita.html">Editar Receita</a></button>
-            <button id="excluirReceita">Excluir Receita</a></button>
-            <button id="adicionarDespesa"><a href="./adicionar_despesa.html">Adicionar Despesa</a></button>
-            <button id="editarDespesa"><a href="./editar_despesa.html">Editar Despesa</a></button>
-            <button id="excluirDespesa">Excluir Despesa</a></button>
+            <div class="dropdown">
+                <button class="dropbtn">Receita</button>
+                <div class="dropdown-content">
+                    <a href="./adicionar_receita.html">Adicionar Receita</a>
+                    <a href="./editar_receita.html">Editar Receita</a>
+                    <a href="#" id="excluirReceita">Excluir Receita</a>
+                </div>
+            </div>
+            <div class="dropdown">
+                <button class="dropbtn">Despesa</button>
+                <div class="dropdown-content">
+                    <a href="./adicionar_despesa.html">Adicionar Despesa</a>
+                    <a href="./editar_despesa.html">Editar Despesa</a>
+                    <a href="#" id="excluirDespesa">Excluir Despesa</a>
+                </div>
+            </div>
+            <div class="dropdown">
+                <button class="dropbtn">Cartão</button>
+                <div class="dropdown-content">
+                    <a href="./adicionar_cartao.html">Adicionar Cartão</a>
+                    <a href="./editar_cartao.html">Editar Cartão</a>
+                    <a href="#" id="excluirCartao">Excluir Cartão</a>
+                    <a href="./criar_contas_pagar.html">Criar Contas a Pagar</a>
+                </div>
+            </div>
             <button id="relatorio">Gerar Relatório</button>
         </div>
 

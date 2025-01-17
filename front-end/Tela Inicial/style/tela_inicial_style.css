@@ -28,23 +28,41 @@ header h1 {
 
 header .profile {
   position: absolute;
-  top: 20px;
+  top: 17px;
   right: 20px;
 }
 
-header .profile a {
-  color: #fff;
-  text-decoration: none;
-  font-size: 18px;
-  padding: 5px 10px;
-  border: 1px solid #fff;
-  border-radius: 5px;
-  transition: background 0.3s, color 0.3s;
+header .profile2 {
+  position: absolute;
+  top: 57px;
+  right: 20px;
 }
 
-header .profile a:hover {
-  background: #fff;
-  color: #333;
+header .profile button, header .profile2 button {
+  color: #000; /* Cor do texto branca */
+  border: none; /* Remove a borda */
+  cursor: pointer; /* Cursor de ponteiro ao passar o mouse */
+  font-size: 16px; /* Tamanho da fonte */
+  border-radius: 5px; /* Bordas arredondadas */
+  transition: background 0.3s, transform 0.3s; /* Transições suaves */
+}
+
+header .profile button:hover, header .profile2 button:hover {
+  background-color: #45a049; /* Cor de fundo ao passar o mouse */
+  transform: scale(1.05); /* Leve aumento ao passar o mouse */
+}
+
+header .profile a, header .profile2 a {
+  color: #000; /* Cor do texto branca */
+  text-decoration: none; /* Remove o sublinhado */
+  font-size: 18px; /* Tamanho da fonte */
+  padding: 5px 10px; /* Espaçamento interno */
+  display: block; /* Exibe como bloco para ocupar todo o botão */
+  width: 40px;
+}
+
+header .profile a:hover, header .profile2 a:hover {
+  color: white; /* Mantém a cor do texto branca ao passar o mouse */
 }
 
 .control-panel {

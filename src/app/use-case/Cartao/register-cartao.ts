@@ -3,6 +3,7 @@ import { CartoesRepository } from "../../repository/cartoes-repository";
 import { ContaRepository } from "../../repository/conta-repository";
 import { RegistroNaoEncontrado } from "../Erros/registro_nao_encontrado";
 import { ErroAoCriarCartao } from "./Erros/erroAoCriarCartao";
+import { ValorLimiteMinimo } from "./Erros/valor_limite";
 
 interface registerCartoesUseCaseRequest {
   limite: number
@@ -31,8 +32,13 @@ export class RegisterCartaoUseCase {
       throw new RegistroNaoEncontrado()
     }
 
+    if (limite < 50) {
+      throw new ValorLimiteMinimo()
+    }
+
     const newCartao = new Cartao({
       userId: conta.id,
+      token,
       limite,
       descricao,
       nomeBanco,

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adicionar Cartão - Controle Financeiro</title>
+    <link rel="stylesheet" href="./style/adicionar.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Adicionar Cartão</h1>
+            <div class="cabecalho">
+                <a href="tela_inicial.html">Voltar</a>
+            </div>
+        </header>
+
+        <div class="receita-details">
+            <h2>Informações do Cartão:</h2>
+            <form id="cartaoForm">
+                <div class="form-group">
+                    <label for="limiteCredito">Limite de Crédito:</label>
+                    <input type="text" id="limiteCredito" name="limiteCredito" required>
+                </div>
+                <div class="form-group">
+                    <label for="nomeCartao">Nome do Cartão:</label>
+                    <input type="text" id="nomeCartao" name="nomeCartao" required>
+                </div>
+                <div class="form-group">
+                    <label for="nomeBanco">Nome do Banco:</label>
+                    <input type="text" id="nomeBanco" name="nomeBanco" required>
+                </div>
+                <div class="form-group">
+                    <label for="diaFechamento">Dia do Fechamento da Fatura:</label>
+                    <input type="string" id="diaFechamento" name="diaFechamento" min="1" max="31" required>
+                </div>
+                <div class="form-group">
+                    <label for="diaVencimento">Dia do Vencimento da Fatura:</label>
+                    <input type="string" id="diaVencimento" name="diaVencimento" min="1" max="31" required>
+                </div>
+                <div class="form-group buttons">
+                    <button type="submit" class="btn btn-add" id="adicionarCartao">Adicionar</button>
+                    <button type="reset" class="btn btn-clear">Limpar Dados</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="../script/valida_token.js"></script>
+    <script src="./scripts/Cartao/adicionar_cartao.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="../script/exibeErro.js"></script>
+    <script src="../script/exibeSucesso.js"></script>
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adicionar Cartão - Controle Financeiro</title>
+    <link rel="stylesheet" href="./style/filtrar_dados.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Adicionar Receita</h1>
+      <div class="cabecalho">
+        <a href="tela_inicial.html">Voltar</a>
+      </div>
+    </header>
+
+    <div class="summary">
+      <div class="box" id="mostraReceita">
+          <h2>Receitas</h2>
+          <p></p>
+      </div>
+    </div>
+
+    <table id="dataTable">
+      <thead>
+        <tr>
+          <th>Categoria</th>
+          <th>Descrição</th>
+          <th>Valor</th>
+          <th>Meio Pagamento</th>
+          <th>Data</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </div>
+
+    <script src="../script/valida_token.js"></script>
+    <script src="./scripts/Entrada/busca_todas_receitas.js"></script>
+    <script src="./scripts/Entrada/soma_receitas.js"></script>
+</body>
+</html>

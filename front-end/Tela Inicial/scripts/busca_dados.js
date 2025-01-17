@@ -2,44 +2,6 @@ const mostraDespesa = document.querySelector('#mostraDespesa p');
 const mostraReceita = document.querySelector('#mostraReceita p');
 const mostraSaldo = document.querySelector('#mostraSaldo p');
 
-async function buscaDadosEntradas() {
-  try {
-    const response = await fetch(`http://localhost:2578/find/entradas?token=${localStorage.getItem('tokenConta')}`, {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${localStorage.getItem('token')}`
-      }
-    });
-    
-    if (response.ok) {
-      const data = await response.json();
-      return data.entrada.map(item => ({ ...item, tipo: 'Receitas' }));
-    }
-  } catch (err) {
-    ExibeError(err.message);
-  }
-}
-
-async function buscaDadosSaidas() {
-  try {
-    const response = await fetch(`http://localhost:2578/find/saidas?token=${localStorage.getItem('tokenConta')}`, {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${localStorage.getItem('token')}`
-      }
-    });
-    
-    if (response.ok) {
-      const data = await response.json();
-      return data.saida.map(item => ({ ...item, tipo: 'Despesas' }));
-    }
-  } catch (err) {
-    ExibeError(err.message);
-  }
-}
-
 async function carregarDados() {
   const entradas = await buscaDadosEntradas();
   const saidas = await buscaDadosSaidas();

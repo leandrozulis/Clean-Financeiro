@@ -1,5 +1,3 @@
-const mostraDespesa = document.querySelector('#mostraDespesa p');
-const mostraReceita = document.querySelector('#mostraReceita p');
 const mostraSaldo = document.querySelector('#mostraSaldo p');
 
 async function carregarDados() {

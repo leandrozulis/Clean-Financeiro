@@ -7,10 +7,7 @@ const adicionarCartao = document.getElementById('adicionarCartao')
 
 adicionarCartao.addEventListener('click', async (e) => {
 
-  e.preventDefault();
-
-  console.log(limiteCredito.value);
-  
+  e.preventDefault();  
 
   if (limiteCredito.value <= 0 ) {
     exibeError('O valor informado deve ser maior que 0.');

@@ -11,4 +11,14 @@ export class CartaoPrismaRepository implements CartoesRepository {
       data: cartao
     })
   }
+
+  async delete(id: string): Promise<Cartao | null> {
+    const cartao = await prisma.cartao.delete({
+      where: {
+        id
+      }
+    })
+
+    return CartaoMappers.toDomain(cartao)
+  }
 }

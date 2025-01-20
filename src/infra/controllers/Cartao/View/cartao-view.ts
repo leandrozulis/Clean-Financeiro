@@ -12,4 +12,16 @@ export class CartaoView {
       dtvencimento
     }
   }
+
+  static deleteCartaoUseCase({ id, descricao, userId, dtcadastro, nomeBanco, dtfechamento, dtvencimento }: Cartao) {
+    return {
+      id,
+      descricao,
+      userId,
+      dtcadastro,
+      nomeBanco,
+      dtfechamento,
+      dtvencimento
+    }
+  }
 }

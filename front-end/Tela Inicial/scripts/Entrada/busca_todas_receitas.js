@@ -1,5 +1,3 @@
-const mostraReceita = document.querySelector('#mostraReceita p');
-
 async function buscaDadosEntradas() {
   try {
     const response = await fetch(`http://localhost:2578/find/entradas?token=${localStorage.getItem('tokenConta')}`, {

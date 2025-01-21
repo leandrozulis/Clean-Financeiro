@@ -3,22 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Editar Receita - Controle Financeiro</title>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <link rel="stylesheet" href="style/adicionar.css">
+    <title>Editar Despesa - Controle Financeiro</title>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.11.0/dist/sweetalert2.min.css"></script>
+    <link rel="stylesheet" href="../style/adicionar.css">
 </head>
 <body>
     <div class="container">
         <header>
-            <h1>Editar Receita</h1>
+            <h1>Editar Despesa</h1>
             <div class="cabecalho">
                 <a href="tela_inicial.html">Voltar</a>
             </div>
         </header>
 
         <div class="receita-details">
-          <h2>Edição de Receita:</h2>
-          <form id="profileForm">
+          <h2>Edição de Despesa:</h2>
+          <form id="profileFormDespesa">
               <div class="form-group">
                   <label for="descricao">Descrição:</label>
                   <input type="text" id="descricao" name="descricao" required>
@@ -32,18 +32,18 @@
                   <input type="text" id="valor" name="valor" required>
               </div>
               <div class="form-group buttons">
-                  <button type="submit" class="btn btn-add" id="editarReceita">Alterar</button>
+                  <button type="submit" class="btn btn-add" id="editarDespesa">Alterar</button>
                   <button type="reset" class="btn btn-clear">Limpar Dados</button>
               </div>
           </form>
       </div>
     </div>
 
-    <script src="../script/valida_token.js"></script>
-    <script src="./scripts/Entrada/busca_dados_receita.js"></script>
-    <script src="./scripts/Entrada/editar_receita.js"></script>
+    <script src="../../script/valida_token.js"></script>
+    <script src="../scripts/Saida/busca_dados_despesa.js"></script>
+    <script src="../scripts/Saida/editar_despesa.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.11.0/dist/sweetalert2.all.min.js"></script>
-    <script src="../script/exibeSucesso.js"></script>
-    <script src="../script/exibeErro.js"></script>
+    <script src="../../script/exibeErro.js"></script>
+    <script src="../../script/exibeSucesso.js"></script>
 </body>
 </html>

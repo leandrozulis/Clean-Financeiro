@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Controle Financeiro</title>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <link rel="stylesheet" href="style/tela_inicial_style.css">
+    <link rel="stylesheet" href="../style/tela_inicial_style.css">
 </head>
 <body>
     <div class="container">
@@ -13,12 +13,12 @@
             <h1>Controle Financeiro</h1>
             <div class="profile">
                 <button id="perfil">
-                    <a href="perfil.html">Perfil</a>
+                    <a href="../Conta/perfil.html">Perfil</a>
                 </button>
             </div>
             <div class="profile2">
                 <button id="sair">
-                    <a href="../Login/index.html">Sair</a>
+                    <a href="../../Login/index.html">Sair</a>
                 </button>
             </div>
         </header>
@@ -27,28 +27,25 @@
             <div class="dropdown">
                 <button class="dropbtn">Receita</button>
                 <div class="dropdown-content">
-                    <a href="./filtrar_receitas.html">Entrar em Receitas</a>
-                    <a href="./adicionar_receita.html">Adicionar Receita</a>
-                    <a href="./editar_receita.html">Editar Receita</a>
+                    <a href="../Receita/filtrar_receitas.html">Entrar em Receitas</a>
+                    <a href="../Receita/adicionar_receita.html">Adicionar Receita</a>
+                    <a href="../Receita/editar_receita.html">Editar Receita</a>
                     <a href="#" id="excluirReceita">Excluir Receita</a>
                 </div>
             </div>
             <div class="dropdown">
                 <button class="dropbtn">Despesa</button>
                 <div class="dropdown-content">
-                    <a href="./filtrar_despesas.html">Entrar em Despesas</a>
-                    <a href="./adicionar_despesa.html">Adicionar Despesa</a>
-                    <a href="./editar_despesa.html">Editar Despesa</a>
+                    <a href="../Despesa/filtrar_despesas.html">Entrar em Despesas</a>
+                    <a href="../Despesa/adicionar_despesa.html">Adicionar Despesa</a>
+                    <a href="../Despesa/editar_despesa.html">Editar Despesa</a>
                     <a href="#" id="excluirDespesa">Excluir Despesa</a>
                 </div>
             </div>
             <div class="dropdown">
                 <button class="dropbtn">Cartão</button>
                 <div class="dropdown-content">
-                    <a href="./cartoes.html">Consulta Cartões</a>
-                    <!-- <a href="./editar_cartao.html">Editar Cartão</a>
-                    <a href="#" id="excluirCartao">Excluir Cartão</a> -->
-                    <a href="./criar_contas_pagar.html">Criar Contas a Pagar</a>
+                    <a href="#">Consulta Cartões</a>
                 </div>
             </div>
             <button id="relatorio">Gerar Relatório</button>
@@ -92,24 +89,24 @@
         </div>
     </div>
 
-    <script src="../script/valida_token.js"></script>
-    <script src="./scripts/Conta/busca_conta.js"></script>
-    <script src="./scripts/Saida/soma_despesas.js"></script>
-    <script src="./scripts/Entrada/soma_receitas.js"></script>
-    <script src="./scripts/Entrada/busca_todas_receitas.js"></script>
-    <script src="./scripts/Saida/busca_todas_despesas.js"></script>
-    <script src="./scripts/busca_dados.js"></script>
-    <script src="./scripts/valida_id.js"></script>
-    <script src="./scripts/modal_exclusao.js"></script>
-    <script src="./scripts/Saida/busca_dados_despesa.js"></script>
-    <script src="./scripts/Saida/deletar_despesa.js"></script>
-    <script src="./scripts/Entrada/busca_dados_receita.js"></script>
-    <script src="./scripts/Entrada/deletar_receita.js"></script>
-    <script src="./scripts/Cartao/deletar_cartao.js"></script>
+    <script src="../../script/valida_token.js"></script>
+    <script src="../scripts/Conta/busca_conta.js"></script>
+    <script src="../scripts/Saida/soma_despesas.js"></script>
+    <script src="../scripts/Entrada/soma_receitas.js"></script>
+    <script src="../scripts/Entrada/busca_todas_receitas.js"></script>
+    <script src="../scripts/Saida/busca_todas_despesas.js"></script>
+    <script src="../scripts/busca_dados.js"></script>
+    <script src="../scripts/valida_id.js"></script>
+    <script src="../scripts/modal_exclusao.js"></script>
+    <script src="../scripts/Saida/busca_dados_despesa.js"></script>
+    <script src="../scripts/Saida/deletar_despesa.js"></script>
+    <script src="../scripts/Entrada/busca_dados_receita.js"></script>
+    <script src="../scripts/Entrada/deletar_receita.js"></script>
+    <script src="../scripts/Cartao/deletar_cartao.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.11.0/dist/sweetalert2.all.min.js"></script>
-    <script src="../script/exibeErro.js"></script>
-    <script src="../script/exibeSucesso.js"></script>
-    <script src="../script/atencao.js"></script>
-    <script src="./scripts/encerrar_conexao.js"></script>
+    <script src="../../script/exibeErro.js"></script>
+    <script src="../../script/exibeSucesso.js"></script>
+    <script src="../../script/atencao.js"></script>
+    <script src="../scripts/encerrar_conexao.js"></script>
 </body>
 </html>

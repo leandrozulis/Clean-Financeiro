@@ -15,7 +15,7 @@ adicionarReceita.addEventListener('click', async (e) => {
   const entrada = await registrarReceita();
   if (entrada) {
     exibeSucesso('Receita adicionada com sucesso!').then(() => {
-      window.location.href = './tela_inicial.html';
+      window.location.href = '../../Tela Inicial/Inicio/tela_inicial.html';
     })
   } else {
     exibeError('Erro ao registrar receita.');

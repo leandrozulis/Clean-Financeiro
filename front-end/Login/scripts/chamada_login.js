@@ -25,7 +25,7 @@ loginFormElement.addEventListener('submit', async (e) => {
       localStorage.setItem('expiresAt', expirationTime.toString());
       localStorage.setItem('tokenConta', data.tokenConta);
 
-      window.location.href = '../Tela Inicial/tela_inicial.html';
+      window.location.href = '../Tela Inicial/Inicio/tela_inicial.html';
 
     } else {
       const error = await response.json();

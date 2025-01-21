@@ -15,7 +15,7 @@ adicionarDespesa.addEventListener('click', async (e) => {
   const saida = await registrarDespesa();
   if (saida) {
     exibeSucesso('Despesa adicionada com sucesso!').then(() => {
-      window.location.href = './tela_inicial.html';
+      window.location.href = '../../Tela Inicial/Inicio/tela_inicial.html';
     });
   } else {
     exibeError('A conta não contem valor para Saque!');

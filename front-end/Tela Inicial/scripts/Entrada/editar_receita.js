@@ -11,7 +11,7 @@ document.getElementById('profileForm').addEventListener('submit', async (e) => {
   if (entrada) {
     exibeSucesso('Receita atualizada com sucesso!').then(() => {
       localStorage.removeItem('selectedRowId');
-      window.location.href = './tela_inicial.html';
+      window.location.href = '../../Tela Inicial/Inicio/tela_inicial.html';
     });
   }
 });

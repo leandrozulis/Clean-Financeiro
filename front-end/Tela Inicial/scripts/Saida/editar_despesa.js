@@ -13,7 +13,7 @@ document.getElementById('profileFormDespesa').addEventListener('submit', async (
   if (saida) {
     exibeSucesso('Despesa atualizada com sucesso!').then(() => {
       localStorage.removeItem('selectedRowId');
-      window.location.href = './tela_inicial.html';
+      window.location.href = '../../Tela Inicial/Inicio/tela_inicial.html';
     });
   }
 });

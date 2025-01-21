@@ -27,4 +27,8 @@ export class CartaoMappers {
       userId
     }, id)
   }
+
+  static toDomains(raws: { id, limite, descricao, nomeBanco, dtfechamento, dtvencimento, dtcadastro, userId, dtatualizacao }[]): Cartao[] {
+    return raws.map(this.toDomain)
+  }
 }

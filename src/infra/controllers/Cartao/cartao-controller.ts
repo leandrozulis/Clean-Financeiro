@@ -5,11 +5,13 @@ import { ValidatedToken, validatedToken } from "../TokenDTO/validatedToken";
 import { CartaoView } from "./View/cartao-view";
 import { deleteCartaoDTO, DeleteCartaoDTO } from "./DTO/delete-cartao-dto";
 import { DeleteCartaoUseCase } from "../../../app/use-case/Cartao/delete-cartao";
+import { GetManyCartaoUseCase } from "../../../app/use-case/Cartao/get-many-cartao";
 
 export class CartaoController {
   constructor(
     private createCartaoUseCase: RegisterCartaoUseCase,
-    private deleteCartaoUseCase: DeleteCartaoUseCase
+    private deleteCartaoUseCase: DeleteCartaoUseCase,
+    private getManyCartaoUseCase: GetManyCartaoUseCase
   ) { }
 
   async create(req: FastifyRequest, reply: FastifyReply) {
@@ -58,5 +60,24 @@ export class CartaoController {
         message: error.message
       })
     }
+  }
+
+  async getManyCartoes(req: FastifyRequest, reply: FastifyReply) {
+
+    try {
+      const { token }: ValidatedToken = validatedToken.parse(req.query)
+      const { cartoes } = await this.getManyCartaoUseCase.execute({
+        token
+      })
+
+      reply.status(200).send({
+        cartoes: CartaoView.getAllCartao(cartoes)
+      })
+    } catch (error) {
+      reply.status(400).send({
+        message: error.message
+      })
+    }
+
   }
 }

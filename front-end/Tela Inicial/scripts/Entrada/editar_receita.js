@@ -54,7 +54,7 @@ async function carregarEntrada() {
 
   if (entrada === undefined) {
     exibeError('Receita não encontrada.').then(() => {
-      window.location.href = './tela_inicial.html';
+      window.location.href = '../../Tela Inicial/Inicio/tela_inicial.html';
       return;
     });
   }

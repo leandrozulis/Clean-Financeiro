@@ -56,7 +56,7 @@ async function carregarSaida() {
 
   if (saida === undefined) {
     exibeError('Despesa não encontrada.').then(() => {
-      window.location.href = './tela_inicial.html';
+      window.location.href = '../../Tela Inicial/Inicio/tela_inicial.html';
       return;
     });
   }

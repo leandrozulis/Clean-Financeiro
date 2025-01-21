@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contas a Pagar</title>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <link rel="stylesheet" href="./style/cartoes.css">
+</head>
+
+<body>
+  <div class="container">
+    <header>
+      <h1>Conta a pagar</h1>
+      <div class="profile">
+        <button id="perfil">
+          <a href="tela_inicial.html">Voltar</a>
+        </button>
+      </div>
+      <div class="profile2">
+        <button id="sair">
+          <a href="../Login/index.html">Sair</a>
+        </button>
+      </div>
+    </header>
+
+    <div class="control-panel">
+      <div class="dropdown">
+        <a href="./editar_cartao.html">Editar Conta a Pagar</a>
+        <!-- <a href="#" id="excluirCartao">Excluir Cartão</a> -->
+        <a href="./criar_contas_pagar.html">Criar Contas a Pagar</a>
+      </div>
+    </div>
+
+    <div class="summary">
+      <div class="box" id="mostraReceita">
+        <h2>Valor a Pagar</h2>
+        <p></p>
+      </div>
+      <div class="box" id="mostraDespesa">
+        <h2>Valor Pago</h2>
+        <p></p>
+      </div>
+    </div>
+
+    <table id="dataTable">
+      <thead>
+        <tr>
+          <th>Categoria</th>
+          <th>Descrição</th>
+          <th>Valor</th>
+          <th>Meio Pagamento</th>
+          <th>Data</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+
+    <div id="confirmationModal" class="modal">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <p>Você realmente quer excluir este registro?</p>
+        <button id="confirmDelete">Sim</button>
+        <button id="cancelDelete">Não</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="../script/valida_token.js"></script>
+  <script src="./scripts/Cartao/deletar_cartao.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.11.0/dist/sweetalert2.all.min.js"></script>
+  <script src="../script/exibeErro.js"></script>
+  <script src="../script/exibeSucesso.js"></script>
+  <script src="../script/atencao.js"></script>
+  <script src="./scripts/encerrar_conexao.js"></script>
+</body>
+
+</html>

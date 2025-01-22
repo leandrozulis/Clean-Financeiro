@@ -6,12 +6,14 @@ import { CartaoView } from "./View/cartao-view";
 import { deleteCartaoDTO, DeleteCartaoDTO } from "./DTO/delete-cartao-dto";
 import { DeleteCartaoUseCase } from "../../../app/use-case/Cartao/delete-cartao";
 import { GetManyCartaoUseCase } from "../../../app/use-case/Cartao/get-many-cartao";
+import { GetByCartaoUseCase } from "../../../app/use-case/Cartao/get-cartao";
 
 export class CartaoController {
   constructor(
     private createCartaoUseCase: RegisterCartaoUseCase,
     private deleteCartaoUseCase: DeleteCartaoUseCase,
-    private getManyCartaoUseCase: GetManyCartaoUseCase
+    private getManyCartaoUseCase: GetManyCartaoUseCase,
+    private getByCartaoUseCase: GetByCartaoUseCase
   ) { }
 
   async create(req: FastifyRequest, reply: FastifyReply) {
@@ -79,5 +81,24 @@ export class CartaoController {
       })
     }
 
+  }
+
+  async getCartao(req: FastifyRequest, reply: FastifyReply) {
+    try {
+      const { token }: ValidatedToken = validatedToken.parse(req.query)
+      const { cartaoId }: DeleteCartaoDTO = deleteCartaoDTO.parse(req.params)
+      const { cartao } = await this.getByCartaoUseCase.execute({
+        cartaoId,
+        token
+      })
+
+      reply.status(200).send({
+        cartao: CartaoView.getByCartao(cartao)
+      })
+    } catch (error) {
+      reply.status(400).send({
+        message: error.message
+      })
+    }
   }
 }

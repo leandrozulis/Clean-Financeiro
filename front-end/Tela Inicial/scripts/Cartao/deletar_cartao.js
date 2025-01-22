@@ -7,7 +7,7 @@ async function deletarCartao() {
         'Authorization': `Bearer ${localStorage.getItem('token')}`
       },
       body: JSON.stringify({
-        "cartaoId": localStorage.getItem('selectedRowId'),
+        "cartaoId": localStorage.getItem('idCartao'),
       })
     });
     

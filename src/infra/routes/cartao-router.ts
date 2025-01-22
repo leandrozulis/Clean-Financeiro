@@ -6,18 +6,24 @@ import { CartaoPrismaRepository } from "../config/prisma/repository/cartao-prism
 import { ContaPrismaRepository } from "../config/prisma/repository/conta-prisma-repository";
 import { DeleteCartaoUseCase } from "../../app/use-case/Cartao/delete-cartao";
 import { GetManyCartaoUseCase } from "../../app/use-case/Cartao/get-many-cartao";
+import { GetByCartaoUseCase } from "../../app/use-case/Cartao/get-cartao";
 
 export async function CartaoaRouter(app: FastifyInstance) {
 
   const cartaoRepository = new CartaoPrismaRepository()
   const contaRepository = new ContaPrismaRepository()
   const getManyCartoesUseCase = new GetManyCartaoUseCase(cartaoRepository, contaRepository)
+  const getByCartaoUseCase = new GetByCartaoUseCase(cartaoRepository, contaRepository)
   const deleteCartaoUseCase = new DeleteCartaoUseCase(cartaoRepository, contaRepository)
   const createCartaoUseCase = new RegisterCartaoUseCase(cartaoRepository, contaRepository)
-  const cartaoController = new CartaoController(createCartaoUseCase, deleteCartaoUseCase, getManyCartoesUseCase)
+  const cartaoController = new CartaoController(createCartaoUseCase, deleteCartaoUseCase, getManyCartoesUseCase, getByCartaoUseCase)
 
   app.get('/find/allcartoes', { onRequest: [verifyJWT] }, async (req: FastifyRequest, reply: FastifyReply) => {
     await cartaoController.getManyCartoes(req, reply)
+  })
+
+  app.get('/find/cartao/:cartaoId', { onRequest: [verifyJWT] }, async (req: FastifyRequest, reply: FastifyReply) => {
+    await cartaoController.getCartao(req, reply)
   })
 
   app.post('/register/cartao', { onRequest: [verifyJWT] }, async (req: FastifyRequest, reply: FastifyReply) => {

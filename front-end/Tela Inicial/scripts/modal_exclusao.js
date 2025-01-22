@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         await deletarReceita()
         exibeSucesso('Receita excluída com sucesso!').then(async () => {
           modal.style.display = 'none';
-          window.location.href = './tela_inicial.html'
+          window.location.href = '../Inicio/tela_inicial.html'
         });
       }
 
@@ -48,7 +48,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         await deletarDespesa()
         exibeSucesso('Despesa excluída com sucesso!').then(async () => {
           modal.style.display = 'none';
-          window.location.href = './tela_inicial.html'
+          window.location.href = '../Inicio/tela_inicial.html'
         });
       }
 

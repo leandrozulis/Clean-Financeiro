@@ -25,6 +25,16 @@ export class CartaoView {
     }
   }
 
+  static getByCartao({ descricao, dtcadastro, nomeBanco, dtfechamento, dtvencimento }: Cartao) {
+    return {
+      descricao,
+      dtcadastro,
+      nomeBanco,
+      dtfechamento,
+      dtvencimento
+    }
+  }
+
   static getAllCartao(cartoes: Cartao[]): any[] {
     return cartoes.map((cartao) => ({
       id: cartao.id,

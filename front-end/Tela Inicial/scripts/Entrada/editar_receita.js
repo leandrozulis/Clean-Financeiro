@@ -72,7 +72,7 @@ window.onload = function () {
   const isValid = isTokenValid();
 
   if (isValid === null) {
-    window.location.href = '../Login/index.html'
+    window.location.href = '../../../Login/index.html'
   } else if (!isValid) {
     logoutUser();
   } else {

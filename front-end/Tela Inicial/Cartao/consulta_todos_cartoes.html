@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cartões</title>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <link rel="stylesheet" href="../style/consulta_cartoes.css">
+</head>
+
+<body>
+  <div class="container">
+    <header>
+      <h1>Meus Cartões</h1>
+      <div class="profile">
+        <button id="perfil">
+          <a href="../Inicio/tela_inicial.html">Voltar</a>
+        </button>
+      </div>
+      <div class="profile2">
+        <button id="sair">
+          <a href="../../Login/index.html">Sair</a>
+        </button>
+      </div>
+    </header>
+
+    <div class="control-panel">
+      <div class="dropdown">
+        <a href="./editar_cartao.html">Adicionar Cartão</a>
+        <a href="#" id="excluirCartao">Excluir Cartão</a>
+      </div>
+    </div>
+
+    <div class="summary">
+      <div class="box" id="cards">
+      </div>
+    </div>
+
+    <div id="confirmationModal" class="modal">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <p>Você realmente quer excluir este registro?</p>
+        <button id="confirmDelete">Sim</button>
+        <button id="cancelDelete">Não</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="../../script/valida_token.js"></script>
+  <script src="../scripts/Cartao/busca_todos_cartoes.js"></script>
+  <script src="../scripts/encerrar_conexao.js"></script>
+</body>
+
+</html>

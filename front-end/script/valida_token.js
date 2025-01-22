@@ -32,5 +32,5 @@ function logoutUser() {
   localStorage.removeItem('expiresAt');
   localStorage.removeItem('selectedRowId');
   alert('Sua sessão expirou. Por favor, faça login novamente.');
-  window.location.href = '../Login/index.html'; // Ajuste o caminho conforme sua estrutura
+  window.location.href = '../../Login/index.html'; // Ajuste o caminho conforme sua estrutura
 }

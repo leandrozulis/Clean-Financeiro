@@ -5,5 +5,5 @@ sair.addEventListener('click', (e) => {
   localStorage.removeItem('token')
   localStorage.removeItem('tokenConta')
 
-  window.innerWidth = '../Login/index.html'
+  window.innerWidth = '../../Login/index.html'
 })

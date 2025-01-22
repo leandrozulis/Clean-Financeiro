@@ -107,6 +107,7 @@ window.onload = function () {
     logoutUser();
   } else {
     localStorage.removeItem('selectedRowId');
+    localStorage.removeItem('idCartao');
     carregarDados();
     carregarSaldo();
     somaDespesas();

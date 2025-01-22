@@ -29,15 +29,15 @@ function displayCartoes(cartoes) {
   } else {
     cartoes.forEach(cartao => {
       const cardElement = document.createElement('div');
-      cardElement.dataset.id = cartao.id;
+      cardElement.dataset.id = cartao.id;      
       cardElement.classList.add('card');
       cardElement.innerHTML = `
         <h2>${cartao.descricao}</h2>
         <p>Banco: ${cartao.nomeBanco}</p>
       `;
-      cardsContainer.addEventListener('click', (e) => {
+      cardElement.addEventListener('click', (e) => {
         e.stopPropagation();
-        localStorage.setItem('idCartao', this.dataset.id);
+        localStorage.setItem('idCartao', cardElement.dataset.id);
       });
       cardsContainer.appendChild(cardElement);
     });
@@ -54,6 +54,7 @@ window.onload = async function () {
     logoutUser();
   } else {
     localStorage.removeItem('selectedRowId');
+    localStorage.removeItem('idCartao');
     const cartoes = await buscaTodosOsCartoes()
     displayCartoes(cartoes)
     setupAutoLogout();

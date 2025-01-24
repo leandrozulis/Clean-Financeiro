@@ -14,17 +14,18 @@ datasource db {
 }
 
 model Conta {
-  id            String    @id @default(uuid())
-  email         String    @unique
+  id            String        @id @default(uuid())
+  email         String        @unique
   senha         String
   token         String
   nome          String
   saldo         Float
-  dtcadastro    DateTime  @default(now())
-  dtatualizacao DateTime? @default(now())
+  dtcadastro    DateTime      @default(now())
+  dtatualizacao DateTime?     @default(now())
   Entrada       Entrada[]
   Saida         Saida[]
   Cartao        Cartao[]
+  ContaAPagar   ContaAPagar[]
 
   @@map("contas")
 }
@@ -65,8 +66,27 @@ model Cartao {
   dtcadastro    DateTime  @default(now())
   dtatualizacao DateTime? @default(now())
 
+  conta       Conta         @relation(fields: [userId], references: [id])
+  userId      String
+  ContaAPagar ContaAPagar[]
+
+  @@map("cartoes")
+}
+
+model ContaAPagar {
+  id            String    @id @default(uuid())
+  valor         Float
+  descricao     String
+  parcelas      String
+  pago          DateTime?
+  dtcadastro    DateTime  @default(now())
+  dtatualizacao DateTime? @default(now())
+
+  cartao   Cartao @relation(fields: [cartaoId], references: [id])
+  cartaoId String
+
   conta  Conta  @relation(fields: [userId], references: [id])
   userId String
 
-  @@map("cartoes")
+  @@map("contasAPagar")
 }

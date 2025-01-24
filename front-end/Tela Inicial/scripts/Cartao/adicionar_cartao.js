@@ -17,7 +17,7 @@ adicionarCartao.addEventListener('click', async (e) => {
   const cartao = await registrarCartao();
   if (cartao) {
     exibeSucesso('Cartão criado com sucesso!').then(() => {
-      window.location.href = './tela_inicial.html';
+      window.location.href = '../Cartao/consulta_todos_cartoes.html';
     })
   } else {
     exibeError('Erro ao criar cartão');

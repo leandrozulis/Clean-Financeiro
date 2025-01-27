@@ -1,5 +1,3 @@
-const mostraSaldo = document.querySelector('#mostraSaldo p');
-
 async function carregarDados() {
   const entradas = await buscaDadosEntradas();
   const saidas = await buscaDadosSaidas();
@@ -47,8 +45,6 @@ async function retornoDadosLista(data) {
   const tableBody = document.querySelector('#dataTable tbody');
   tableBody.innerHTML = '';
 
-  console.log(data);
-
   data.forEach((item) => {
     const row = document.createElement('tr');
     row.dataset.id = item.id;
@@ -91,11 +87,6 @@ document.addEventListener('click', function() {
   selection.removeAllRanges();
 
 });
-
-async function carregarSaldo() {
-  const conta = await buscaDadosConta();
-  mostraSaldo.innerHTML = conta.saldo.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
-}
 
 window.onload = function () {
 

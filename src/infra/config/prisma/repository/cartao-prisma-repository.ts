@@ -22,8 +22,12 @@ export class CartaoPrismaRepository implements CartoesRepository {
     return CartaoMappers.toDomain(cartao)
   }
 
-  async findManyCartao(): Promise<Cartao[] | null> {
-    const findManyCartao = await prisma.cartao.findMany()
+  async findManyCartao(userId: string): Promise<Cartao[] | null> {
+    const findManyCartao = await prisma.cartao.findMany({
+      where: {
+        userId
+      }
+    })
 
     return CartaoMappers.toDomains(findManyCartao)
   }

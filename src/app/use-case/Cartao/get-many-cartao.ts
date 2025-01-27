@@ -1,6 +1,7 @@
 import { Cartao } from "../../entities/Cartao";
 import { CartoesRepository } from "../../repository/cartoes-repository";
 import { ContaRepository } from "../../repository/conta-repository";
+import { RegistroNaoEncontrado } from "../Erros/registro_nao_encontrado";
 
 interface GetManyCartoesUseCaseRequest {
   token: string
@@ -21,13 +22,13 @@ export class GetManyCartaoUseCase {
     const conta = await this.contaRepository.findByToken(token)
 
     if (!conta) {
-      throw new Error('Conta não localizada cadastrada!')
+      throw new RegistroNaoEncontrado()
     }
 
-    const cartoes = await this.cartoesRepository.findManyCartao()
+    const cartoes = await this.cartoesRepository.findManyCartao(conta.id)
 
     if (!cartoes) {
-      throw new Error('Não existem cartões cadastradas!')
+      throw new RegistroNaoEncontrado()
     }
 
     return {

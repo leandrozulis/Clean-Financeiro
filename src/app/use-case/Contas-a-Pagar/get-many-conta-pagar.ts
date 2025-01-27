@@ -1,31 +1,27 @@
+import { Cartao } from "../../entities/Cartao";
 import { ContasAPagar } from "../../entities/Contas_a_Pagar";
 import { CartoesRepository } from "../../repository/cartoes-repository";
 import { ContasAPagarRepository } from "../../repository/conta-a-pagar-repository";
 import { ContaRepository } from "../../repository/conta-repository";
 import { RegistroNaoEncontrado } from "../Erros/registro_nao_encontrado";
 
-interface CreateContaAPagarUseCaseRequest {
-  valor: number
-  descricao: string
-  parcelas: string
-  pago?: Date
+interface GetManyContaAPagarUseCaseRequest {
   token: string
   cartaoId: string
 }
 
-interface CreateContaAPagarUseCaseResponse {
-  contaAPagar: ContasAPagar
+interface GetManyContaAPagarUseCaseResponse {
+  contaApagar: ContasAPagar[]
 }
 
-export class CreateContaAPagarUseCase {
-
+export class GetManyContaApagarUseCase {
   constructor(
-    private contasAPagarRepository: ContasAPagarRepository,
+    private contaApagarRepository: ContasAPagarRepository,
     private cartaoRepository: CartoesRepository,
     private contaRepository: ContaRepository
   ) { }
 
-  async execute({ valor, descricao, parcelas, pago, token, cartaoId }: CreateContaAPagarUseCaseRequest): Promise<CreateContaAPagarUseCaseResponse> {
+  async execute({ token, cartaoId }: GetManyContaAPagarUseCaseRequest): Promise<GetManyContaAPagarUseCaseResponse> {
 
     const conta = await this.contaRepository.findByToken(token)
 
@@ -39,22 +35,15 @@ export class CreateContaAPagarUseCase {
       throw new RegistroNaoEncontrado()
     }
 
-    const contaAPagar = new ContasAPagar({
-      userId: conta.id,
-      valor,
-      descricao,
-      parcelas,
-      pago: pago ?? null,
-      token,
-      cartaoId
-    })
+    const contaApagar = await this.contaApagarRepository.findManyContasAPagar(cartaoId)
 
-    await this.contasAPagarRepository.register(contaAPagar)
+    if (!contaApagar) {
+      throw new RegistroNaoEncontrado()
+    }
 
     return {
-      contaAPagar
+      contaApagar
     }
 
   }
-
 }

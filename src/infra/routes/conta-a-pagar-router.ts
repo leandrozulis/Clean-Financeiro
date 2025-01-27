@@ -5,13 +5,19 @@ import { ContaPrismaRepository } from "../config/prisma/repository/conta-prisma-
 import { CartaoPrismaRepository } from "../config/prisma/repository/cartao-prisma-repository";
 import { ContasAPagarController } from "../controllers/Contas-a-Pagar/contas-a-pagar-controller";
 import { verifyJWT } from "../middleware/authenticate";
+import { GetManyContaApagarUseCase } from "../../app/use-case/Contas-a-Pagar/get-many-conta-pagar";
 
 export async function ContaAPagarRouter(app: FastifyInstance) {
-  const contasAPagarRepository = new ContaAPagarPrismaRepository()
-  const contaRepository = new ContaPrismaRepository()
+  const contasAPagarPrismaRepository = new ContaAPagarPrismaRepository()
+  const contaPrismaRepository = new ContaPrismaRepository()
   const cartaoPrismaRepository = new CartaoPrismaRepository()
-  const createContaAPagarUseCase = new CreateContaAPagarUseCase(contasAPagarRepository, contaRepository, cartaoPrismaRepository)
-  const contaAPagarController = new ContasAPagarController(createContaAPagarUseCase)
+  const createContaAPagarUseCase = new CreateContaAPagarUseCase(contasAPagarPrismaRepository, cartaoPrismaRepository, contaPrismaRepository)
+  const getManyContasAPagarUseCase = new GetManyContaApagarUseCase(contasAPagarPrismaRepository, cartaoPrismaRepository, contaPrismaRepository)
+  const contaAPagarController = new ContasAPagarController(createContaAPagarUseCase, getManyContasAPagarUseCase)
+
+  app.get('/find/allcontasapagar', { onRequest: [verifyJWT] }, async (req: FastifyRequest, reply: FastifyReply) => {
+    await contaAPagarController.getManyContasAPagar(req, reply)
+  })
 
   app.post('/register/contaapagar', { onRequest: [verifyJWT] }, async (req: FastifyRequest, reply: FastifyReply) => {
     await contaAPagarController.register(req, reply)

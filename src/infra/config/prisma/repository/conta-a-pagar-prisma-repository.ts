@@ -36,8 +36,12 @@ export class ContaAPagarPrismaRepository implements ContasAPagarRepository {
     return ContaAPagarMappers.toDomain(conta)
   }
 
-  async findManyContasAPagar(): Promise<ContasAPagar[] | null> {
-    const findManyConta = await prisma.contaAPagar.findMany()
+  async findManyContasAPagar(cartaoId: string): Promise<ContasAPagar[] | null> {
+    const findManyConta = await prisma.contaAPagar.findMany({
+      where: {
+        cartaoId
+      }
+    })
 
     return ContaAPagarMappers.toDomains(findManyConta)
   }

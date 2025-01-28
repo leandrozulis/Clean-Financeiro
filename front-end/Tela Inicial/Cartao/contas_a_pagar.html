@@ -33,27 +33,26 @@
     </div>
 
     <div class="summary">
-      <div class="box" id="mostraReceita">
+      <div class="box" id="mostraValorAPagar">
         <h2>Valor a Pagar</h2>
         <p></p>
       </div>
-      <div class="box" id="mostraDespesa">
+      <div class="box" id="mostraLimite">
         <h2>Limite</h2>
         <p></p>
       </div>
-      <div class="box" id="mostraDespesa">
+      <div class="box" id="mostraValorPago">
         <h2>Valor Pago</h2>
         <p></p>
       </div>
     </div>
 
-    <table id="dataTable">
+    <table id="dataTableContaAPagar">
       <thead>
         <tr>
-          <th>Categoria</th>
           <th>Descrição</th>
           <th>Valor</th>
-          <th>Meio Pagamento</th>
+          <th>Parcelas</th>
           <th>Data</th>
         </tr>
       </thead>
@@ -72,6 +71,10 @@
 
   <script src="../../script/valida_token.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.11.0/dist/sweetalert2.all.min.js"></script>
+  <script src="../scripts/Conta-a-Pagar/busca_todos_contas_a_pagar.js"></script>
+  <script src="../scripts/Conta-a-Pagar/busca_dados_conta_a_pagar.js"></script>
+  <script src="../scripts/Cartao/busca_dados_cartao.js"></script>
+  <script src="../scripts/Conta-a-Pagar/soma_contas.js"></script>
   <script src="../../script/exibeErro.js"></script>
   <script src="../../script/exibeSucesso.js"></script>
   <script src="../../script/atencao.js"></script>

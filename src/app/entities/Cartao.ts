@@ -25,6 +25,7 @@ export class Cartao {
     this._id = id ?? randomUUID()
     this.props = {
       ...props,
+      limite: props.limite ?? 0,
       dtcadastro: props.dtcadastro ?? new Date(),
       dtatualizacao: props.dtatualizacao ?? new Date()
     }

@@ -25,9 +25,10 @@ export class CartaoView {
     }
   }
 
-  static getByCartao({ descricao, dtcadastro, nomeBanco, dtfechamento, dtvencimento }: Cartao) {
+  static getByCartao({ descricao, limite, dtcadastro, nomeBanco, dtfechamento, dtvencimento }: Cartao) {
     return {
       descricao,
+      limite,
       dtcadastro,
       nomeBanco,
       dtfechamento,

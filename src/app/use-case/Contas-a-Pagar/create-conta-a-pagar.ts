@@ -3,6 +3,7 @@ import { CartoesRepository } from "../../repository/cartoes-repository";
 import { ContasAPagarRepository } from "../../repository/conta-a-pagar-repository";
 import { ContaRepository } from "../../repository/conta-repository";
 import { RegistroNaoEncontrado } from "../Erros/registro_nao_encontrado";
+import { ErrorDiminuirLimite } from "./Erros/diminuir-limite-erro";
 
 interface CreateContaAPagarUseCaseRequest {
   valor: number
@@ -49,10 +50,16 @@ export class CreateContaAPagarUseCase {
       cartaoId
     })
 
-    await this.contasAPagarRepository.register(contaAPagar)
+    try {
+      await this.contasAPagarRepository.register(contaAPagar)
+      cartao.saida(valor)
+      await this.cartaoRepository.updateSaldo(cartao.id, cartao.limite)
 
-    return {
-      contaAPagar
+      return {
+        contaAPagar
+      }
+    } catch (error) {
+      throw new ErrorDiminuirLimite()
     }
 
   }

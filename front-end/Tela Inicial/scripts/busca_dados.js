@@ -1,12 +1,10 @@
-async function carregarDados() {
-  const entradas = await buscaDadosEntradas();
-  const saidas = await buscaDadosSaidas();
+async function carregarDados() {  
 
-  const todosDados = [...entradas, ...saidas];
+  const todosValores = await juntaDadosEntradaESaida()
 
-  todosDados.sort((a, b) => new Date(a.dtcadastro) - new Date(b.dtcadastro));
+  todosValores.sort((a, b) => new Date(a.dtcadastro) - new Date(b.dtcadastro));
 
-  retornoDadosLista(todosDados);
+  retornoDadosLista(todosValores);
 }
 
 document.addEventListener('click', function(event) {

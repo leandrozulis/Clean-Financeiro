@@ -5,4 +5,5 @@ export interface CartoesRepository {
   delete(id: string): Promise<Cartao | null>
   getById(id: string): Promise<Cartao | null>
   findManyCartao(userId: string): Promise<Cartao[] | null>
+  updateSaldo(id: string, limite: number): Promise<Cartao | null>
 }

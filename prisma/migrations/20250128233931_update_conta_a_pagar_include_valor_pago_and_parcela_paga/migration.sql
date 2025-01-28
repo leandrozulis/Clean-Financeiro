@@ -1,0 +1,3 @@
+-- AlterTable
+ALTER TABLE "contasAPagar" ADD COLUMN     "parcelaPaga" TEXT NOT NULL DEFAULT '0',
+ADD COLUMN     "valorPago" DOUBLE PRECISION NOT NULL DEFAULT 0;

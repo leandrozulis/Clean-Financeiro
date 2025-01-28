@@ -6,6 +6,8 @@ export interface CartaoSchema {
   descricao: string
   parcelas: string
   pago?: Date | null
+  valorPago: number
+  parcelaPaga: string
   cartaoId: string
   userId: string
   token?: string
@@ -19,12 +21,14 @@ export class ContasAPagar {
   private props: CartaoSchema
 
   constructor(
-    props: Replace<CartaoSchema, { dtcadastro?: Date, dtatualizacao?: Date }>,
+    props: Replace<CartaoSchema, { dtcadastro?: Date, dtatualizacao?: Date, valorPago?: number, parcelaPaga?: string }>,
     id?: string
   ) {
     this._id = id ?? randomUUID()
     this.props = {
       ...props,
+      valorPago: props.valorPago ?? 0,
+      parcelaPaga: props.parcelaPaga ?? "0",
       dtcadastro: props.dtcadastro ?? new Date(),
       dtatualizacao: props.dtatualizacao ?? new Date()
     }
@@ -40,15 +44,17 @@ export class ContasAPagar {
   get pago(): Date | null | undefined { return this.props.pago }
   get token(): string | null | undefined { return this.props.token }
   get cartaoId(): string { return this.props.cartaoId }
-  get userId(): string {
-    return this.props.userId
-  }
+  get userId(): string { return this.props.userId }
   get dtcadastro(): Date { return this.props.dtcadastro }
   get dtatualizacao(): Date | null | undefined { return this.props.dtatualizacao }
+  get valorPago(): number { return this.props.valorPago }
+  get parcelaPaga(): string { return this.props.parcelaPaga }
 
   set valor(valor: number) { this.props.valor = valor }
   set descricao(descricao: string) { this.props.descricao = descricao }
   set parcelas(parcelas: string) { this.props.parcelas = parcelas }
+  set valorPago(valorPago: number) { this.props.valorPago = valorPago }
+  set parcelaPaga(parcelaPaga: string) { this.props.parcelaPaga = parcelaPaga }
   set dtcadastro(dtcadastro: Date) { this.props.dtcadastro = dtcadastro }
 
   criaConta(valor: number) {

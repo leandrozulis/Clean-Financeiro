@@ -79,6 +79,8 @@ model ContaAPagar {
   descricao     String
   parcelas      String
   pago          DateTime?
+  valorPago     Float     @default(0)
+  parcelaPaga   String    @default("0")
   dtcadastro    DateTime  @default(now())
   dtatualizacao DateTime? @default(now())
 

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adicionar Conta a Pagar - Controle Financeiro</title>
+    <link rel="stylesheet" href="../style/adicionar.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Adicionar Conta a Pagar</h1>
+            <div class="cabecalho">
+                <a href="./contas_a_pagar.html">Voltar</a>
+            </div>
+        </header>
+
+        <div class="receita-details">
+            <h2>Informações da Conta:</h2>
+            <form id="cartaoForm">
+                <div class="form-group">
+                    <label for="valorParcela">Valor:</label>
+                    <input type="text" id="valorParcela" name="valorParcela" required>
+                </div>
+                <div class="form-group">
+                    <label for="descricaoContaAPagar">Descrição:</label>
+                    <input type="text" id="descricaoContaAPagar" name="descricaoContaAPagar" required>
+                </div>
+                <div class="form-group">
+                    <label for="parcelas">Parcelas:</label>
+                    <input type="text" id="parcelas" name="parcelas" required>
+                </div>
+                <div class="form-group buttons">
+                    <button type="submit" class="btn btn-add" id="adicionarContaAPagar">Adicionar</button>
+                    <button type="reset" class="btn btn-clear">Limpar Dados</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="../../script/valida_token.js"></script>
+    <script src="../scripts/Conta-a-Pagar/adicionar_conta_a_pagar.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="../../script/exibeErro.js"></script>
+    <script src="../../script/exibeSucesso.js"></script>
+</body>
+</html>

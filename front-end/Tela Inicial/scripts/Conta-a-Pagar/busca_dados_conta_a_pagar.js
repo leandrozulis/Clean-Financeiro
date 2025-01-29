@@ -28,6 +28,11 @@ async function retornoDadosLista(data) {
         <td>${new Date(item.dtcadastro).toLocaleString('pt-BR')}</td>
     `;
 
+    row.addEventListener('click', (e) => {
+      e.stopPropagation();
+      localStorage.setItem('contaapagarId', row.dataset.id)
+    })
+
     tableBody.appendChild(row);
   });
 }
@@ -41,6 +46,7 @@ window.onload = function () {
   } else if (!isValid) {
     logoutUser();
   } else {
+    localStorage.removeItem('contaapagarId');
     carregarDados();
     somaContas();
     setupAutoLogout();

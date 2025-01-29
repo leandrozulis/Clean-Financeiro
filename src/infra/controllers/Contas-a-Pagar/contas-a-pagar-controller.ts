@@ -5,12 +5,15 @@ import { validatedToken, ValidatedToken } from "../TokenDTO/validatedToken";
 import { createContaAPagarDTO, CreateContaAPagarDTO } from "./DTO/create-conta-a-pagar-dto";
 import { ContaAPagarView } from "./View/conta-a-pagar-view";
 import { GetManyContaApagarUseCase } from "../../../app/use-case/Contas-a-Pagar/get-many-conta-pagar";
+import { deleteContaAPagarDTO, DeleteContaAPagarDTO } from "./DTO/delete-conta-a-pagar-dto";
+import { DeleteContaAPagarUseCase } from "../../../app/use-case/Contas-a-Pagar/remote-conta-a-pagar";
 
 export class ContasAPagarController {
 
   constructor(
     private createContaAPagarUseCase: CreateContaAPagarUseCase,
-    private getManyContaApagarUseCase: GetManyContaApagarUseCase
+    private getManyContaApagarUseCase: GetManyContaApagarUseCase,
+    private deleteContaAPagarUseCase: DeleteContaAPagarUseCase
   ) { }
 
   async register(req: FastifyRequest, reply: FastifyReply) {
@@ -50,6 +53,28 @@ export class ContasAPagarController {
 
       return reply.status(200).send({
         contaApagar: ContaAPagarView.getAllContasAPagar(contaApagar)
+      })
+    } catch (error) {
+      reply.status(400).send({
+        message: error.message
+      })
+    }
+  }
+
+  async remove(req: FastifyRequest, reply: FastifyReply) {
+    try {
+      const { cartaoId }: ValidatedCartaoIdDTO = validatedCartaoIdDTO.parse(req.query)
+      const { token }: ValidatedToken = validatedToken.parse(req.query)
+      const { contaapagarId }: DeleteContaAPagarDTO = deleteContaAPagarDTO.parse(req.body)
+
+      const { contaapagar } = await this.deleteContaAPagarUseCase.execute({
+        contaapagarId,
+        cartaoId,
+        token
+      })
+
+      return reply.status(200).send({
+        contaApagar: ContaAPagarView.deleteContaAPagar(contaapagar)
       })
     } catch (error) {
       reply.status(400).send({

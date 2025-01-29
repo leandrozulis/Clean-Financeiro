@@ -6,6 +6,7 @@ import { CartaoPrismaRepository } from "../config/prisma/repository/cartao-prism
 import { ContasAPagarController } from "../controllers/Contas-a-Pagar/contas-a-pagar-controller";
 import { verifyJWT } from "../middleware/authenticate";
 import { GetManyContaApagarUseCase } from "../../app/use-case/Contas-a-Pagar/get-many-conta-pagar";
+import { DeleteContaAPagarUseCase } from "../../app/use-case/Contas-a-Pagar/remote-conta-a-pagar";
 
 export async function ContaAPagarRouter(app: FastifyInstance) {
   const contasAPagarPrismaRepository = new ContaAPagarPrismaRepository()
@@ -13,7 +14,8 @@ export async function ContaAPagarRouter(app: FastifyInstance) {
   const cartaoPrismaRepository = new CartaoPrismaRepository()
   const createContaAPagarUseCase = new CreateContaAPagarUseCase(contasAPagarPrismaRepository, cartaoPrismaRepository, contaPrismaRepository)
   const getManyContasAPagarUseCase = new GetManyContaApagarUseCase(contasAPagarPrismaRepository, cartaoPrismaRepository, contaPrismaRepository)
-  const contaAPagarController = new ContasAPagarController(createContaAPagarUseCase, getManyContasAPagarUseCase)
+  const deleteContaAPagarUseCase = new DeleteContaAPagarUseCase(contasAPagarPrismaRepository, cartaoPrismaRepository, contaPrismaRepository)
+  const contaAPagarController = new ContasAPagarController(createContaAPagarUseCase, getManyContasAPagarUseCase, deleteContaAPagarUseCase)
 
   app.get('/find/allcontasapagar', { onRequest: [verifyJWT] }, async (req: FastifyRequest, reply: FastifyReply) => {
     await contaAPagarController.getManyContasAPagar(req, reply)
@@ -21,5 +23,9 @@ export async function ContaAPagarRouter(app: FastifyInstance) {
 
   app.post('/register/contaapagar', { onRequest: [verifyJWT] }, async (req: FastifyRequest, reply: FastifyReply) => {
     await contaAPagarController.register(req, reply)
+  })
+
+  app.delete('/remove/contaapagar', { onRequest: [verifyJWT] }, async (req: FastifyRequest, reply: FastifyReply) => {
+    await contaAPagarController.remove(req, reply)
   })
 }

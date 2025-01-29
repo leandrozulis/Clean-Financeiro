@@ -23,4 +23,8 @@ export class ContaAPagarView {
       dtcadastro: contaAPagar.dtcadastro
     }))
   }
+
+  static deleteContaAPagar({ valor, descricao, parcelas, pago, valorPago, parcelaPaga, dtcadastro }: ContasAPagar) {
+    return { valor, descricao, parcelas, pago, valorPago, parcelaPaga, dtcadastro }
+  }
 }

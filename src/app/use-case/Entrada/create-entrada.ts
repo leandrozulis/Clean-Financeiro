@@ -44,7 +44,7 @@ export class EntradaSaldoUseCase {
 
     try {
       await this.entradaRepository.register(newEntrada)
-      conta.entrada(valor)
+      conta.entrada(newEntrada.valor)
       await this.contaRepository.updateSaldo(conta.id, conta.saldo)
 
       return {

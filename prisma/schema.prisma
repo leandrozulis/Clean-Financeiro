@@ -26,6 +26,7 @@ model Conta {
   Saida         Saida[]
   Cartao        Cartao[]
   ContaAPagar   ContaAPagar[]
+  RendaFixa     RendaFixa[]
 
   @@map("contas")
 }
@@ -91,4 +92,16 @@ model ContaAPagar {
   userId String
 
   @@map("contasAPagar")
+}
+
+model RendaFixa {
+  id            String    @id @default(uuid())
+  valor         Float
+  dtcadastro    DateTime  @default(now())
+  dtatualizacao DateTime? @default(now())
+
+  conta  Conta  @relation(fields: [userId], references: [id])
+  userId String
+
+  @@map("rendaFixa")
 }

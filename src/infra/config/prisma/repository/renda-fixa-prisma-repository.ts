@@ -15,4 +15,16 @@ export class RendaFixaPrismaRepository implements RendaFixaRepository {
 
   }
 
+  async findManyRendaFixa(userId: string): Promise<RendaFixa[] | null> {
+
+    const findManyRendaFixas = await prisma.rendaFixa.findMany({
+      where: {
+        userId
+      }
+    })
+
+    return RendaFixaMappers.toDomains(findManyRendaFixas)
+
+  }
+
 }

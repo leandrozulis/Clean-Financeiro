@@ -15,4 +15,8 @@ export class RendaFixaMappers {
     }, id)
   }
 
+  static toDomains(raws: { id, valor, userId, dtatualizacao, dtcadastro }[]): RendaFixa[] {
+    return raws.map(this.toDomain)
+  }
+
 }

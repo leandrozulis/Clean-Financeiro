@@ -10,4 +10,14 @@ export class RendaFixaView {
       dtatualizacao
     }
   }
+
+  static getAllRendaFIxas(rendafixas: RendaFixa[]): any[] {
+    return rendafixas.map((rendaFixa) => ({
+      id: rendaFixa.id,
+      userId: rendaFixa.userId,
+      valor: rendaFixa.valor,
+      dtcadastro: rendaFixa.dtcadastro,
+      dtatualizacao: rendaFixa.dtatualizacao
+    }))
+  }
 }

@@ -61,4 +61,12 @@ export class RendaFixa {
   set token(token: string) {
     this.token = token
   }
+
+  entrada(valor: number) {
+    return this.props.valor += valor;
+  }
+
+  saida(valor: number) {
+    return this.props.valor -= valor;
+  }
 }

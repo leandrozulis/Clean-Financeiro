@@ -27,4 +27,14 @@ export class RendaFixaPrismaRepository implements RendaFixaRepository {
 
   }
 
+  async remove(id: string): Promise<RendaFixa | null> {
+    const rendaFixa = await prisma.rendaFixa.delete({
+      where: {
+        id
+      }
+    })
+
+    return RendaFixaMappers.toDomain(rendaFixa)
+  }
+
 }

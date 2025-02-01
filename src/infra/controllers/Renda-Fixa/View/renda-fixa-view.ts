@@ -11,6 +11,16 @@ export class RendaFixaView {
     }
   }
 
+  static deleteRendaFixa({ id, userId, valor, dtatualizacao, dtcadastro }: RendaFixa) {
+    return {
+      id,
+      userId,
+      valor,
+      dtatualizacao,
+      dtcadastro
+    }
+  }
+
   static getAllRendaFIxas(rendafixas: RendaFixa[]): any[] {
     return rendafixas.map((rendaFixa) => ({
       id: rendaFixa.id,

@@ -101,6 +101,7 @@ window.onload = function () {
     carregarSaldo();
     somaDespesas();
     somaReceitas();
+    somaRendaFixas();
     setupAutoLogout();
   }
 

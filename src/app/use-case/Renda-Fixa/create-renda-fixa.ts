@@ -2,6 +2,7 @@ import { RendaFixa } from "../../entities/Renda_Fixa";
 import { ContaRepository } from "../../repository/conta-repository";
 import { RendaFixaRepository } from "../../repository/renda-fixa-repository";
 import { RegistroNaoEncontrado } from "../Erros/registro_nao_encontrado";
+import { SaldoInsuficienteError } from "./Error/saldo-insuficiente-error";
 
 interface CreateRendaFixaRequest {
   valor: number
@@ -24,6 +25,10 @@ export class CreateRendaFixaUseCase {
 
     if (!conta) {
       throw new RegistroNaoEncontrado()
+    }
+
+    if (conta.saldo < valor) {
+      throw new SaldoInsuficienteError()
     }
 
     const rendaFixa = new RendaFixa({

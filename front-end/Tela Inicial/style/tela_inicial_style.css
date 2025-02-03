@@ -198,9 +198,24 @@ header .profile a:hover, header .profile2 a:hover {
   text-decoration: none;
 }
 
-.modal-content p {
+.modal-content {
+  outline: none; /* Remove qualquer foco que possa atrapalhar */
+}
+
+.modal-content p, .form-group {
   font-size: 18px;
   margin-bottom: 20px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 8px;
+  box-sizing: border-box;
 }
 
 .modal-content button {

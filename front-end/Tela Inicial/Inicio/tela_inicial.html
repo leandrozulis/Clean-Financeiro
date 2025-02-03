@@ -45,7 +45,7 @@
             <div class="dropdown">
                 <button class="dropbtn">Transferir</button>
                 <div class="dropdown-content">
-                    <a href="#">Transf. Renda Fixa</a>
+                    <a href="#" id="openTransferModal">Transf. Renda Fixa</a>
                 </div>
             </div>
             <div class="dropdown">
@@ -97,6 +97,19 @@
                 <button id="cancelDelete">Não</button>
             </div>
         </div>
+
+        <div id="transferModal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <h2>Transferir Renda Fixa</h2>
+                <p>Valor da conta atual: R$ <span id="currentAccountValue"></span></p>
+                <div class="form-group">
+                    <label for="transferValue">Valor:</label>
+                    <input type="text" id="transferValue" name="transferValue" required>
+                </div>
+                <button id="submitTransfer">Enviar Transferência</button>
+            </div>
+        </div>
     </div>
 
     <script src="../../script/valida_token.js"></script>
@@ -113,6 +126,7 @@
     <script src="../scripts/busca_dados.js"></script>
     <script src="../scripts/valida_id.js"></script>
     <script src="../scripts/modal_exclusao.js"></script>
+    <script src="../scripts/Renda-fixa/transfer_modal.js"></script>
     <script src="../scripts/Saida/busca_dados_despesa.js"></script>
     <script src="../scripts/Saida/deletar_despesa.js"></script>
     <script src="../scripts/Entrada/busca_dados_receita.js"></script>

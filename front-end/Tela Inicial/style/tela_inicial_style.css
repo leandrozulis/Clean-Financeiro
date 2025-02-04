@@ -160,6 +160,36 @@ header .profile a:hover, header .profile2 a:hover {
   background: rgb(249, 186, 186);
 }
 
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px 0;
+}
+
+table th, table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: center;
+}
+
+table th {
+  background: #77aaff;
+  color: #fff;
+}
+
+table tr:nth-child(even) {
+  background: #f2f2f2;
+}
+
+table tr:hover {
+  background: #ddd;
+}
+
+table tr {
+  cursor: pointer;
+  font-weight: 600;
+}
+
 .modal {
   display: none;
   position: fixed;

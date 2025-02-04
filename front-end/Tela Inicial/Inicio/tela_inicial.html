@@ -45,6 +45,7 @@
             <div class="dropdown">
                 <button class="dropbtn">Transferir</button>
                 <div class="dropdown-content">
+                    <a href="#" id="openModalRendaFixa">Renda Fixas</a>
                     <a href="#" id="openTransferModal">Transf. Renda Fixa</a>
                 </div>
             </div>
@@ -100,7 +101,7 @@
 
         <div id="transferModal" class="modal">
             <div class="modal-content">
-                <span class="close">&times;</span>
+                <span class="close" id="closeModalTransfer">&times;</span>
                 <h2>Transferir Renda Fixa</h2>
                 <p>Valor da conta atual: R$ <span id="currentAccountValue"></span></p>
                 <div class="form-group">
@@ -108,6 +109,26 @@
                     <input type="text" id="transferValue" name="transferValue" required>
                 </div>
                 <button id="submitTransfer">Enviar Transferência</button>
+            </div>
+        </div>
+
+        <div id="rendaFixaModal" class="modal">
+            <div class="modal-content">
+                <span class="close" id="closeModalRendaFixa">&times;</span>
+                <h2>Rendas Fixas</h2>
+                <table id="rendaFixaTable">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>Valor</th>
+                            <th>Data de Criação</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Os registros serão inseridos aqui dinamicamente -->
+                    </tbody>
+                </table>
+                <button id="excluirRendaFixa">Confirmar Exclusão</button>
             </div>
         </div>
     </div>
@@ -123,6 +144,9 @@
     <script src="../scripts/junta_dados_entrada_saida.js"></script>
     <script src="../scripts/Renda-fixa/soma_renda_fixa.js"></script>
     <script src="../scripts/Renda-fixa/buscar_todas_rendas_fixas.js"></script>
+    <script src="../scripts/Renda-fixa/registra_renda_fixa.js"></script>
+    <script src="../scripts/Renda-fixa/modal_rendas_fixas.js"></script>
+    <script src="../scripts/Renda-fixa/deleta_renda_fixa.js"></script>
     <script src="../scripts/busca_dados.js"></script>
     <script src="../scripts/valida_id.js"></script>
     <script src="../scripts/modal_exclusao.js"></script>

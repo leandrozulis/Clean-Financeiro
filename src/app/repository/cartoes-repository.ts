@@ -6,4 +6,5 @@ export interface CartoesRepository {
   getById(id: string): Promise<Cartao | null>
   findManyCartao(userId: string): Promise<Cartao[] | null>
   updateSaldo(id: string, limite: number): Promise<Cartao | null>
+  update(id: string, data: Cartao): Promise<Cartao | null>
 }

@@ -69,4 +69,21 @@ export class CartaoPrismaRepository implements CartoesRepository {
 
     return CartaoMappers.toDomain(cartao)
   }
+
+  async update(id: string, data: Cartao): Promise<Cartao | null> {
+    const cartaoData = CartaoMappers.toPrisma(data)
+
+    const cartao = await prisma.cartao.update({
+      where: {
+        id: id
+      },
+      data: cartaoData
+    })
+
+    if (!cartao) {
+      return null
+    }
+
+    return CartaoMappers.toDomain(cartao)
+  }
 }

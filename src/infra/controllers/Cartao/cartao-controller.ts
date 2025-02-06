@@ -7,13 +7,16 @@ import { deleteCartaoDTO, DeleteCartaoDTO } from "./DTO/delete-cartao-dto";
 import { DeleteCartaoUseCase } from "../../../app/use-case/Cartao/delete-cartao";
 import { GetManyCartaoUseCase } from "../../../app/use-case/Cartao/get-many-cartao";
 import { GetByCartaoUseCase } from "../../../app/use-case/Cartao/get-cartao";
+import { updateCartaoDTO, UpdateCartaoDTO } from "./DTO/update-cartao-dto";
+import { UpdateCartaoUseCase } from "../../../app/use-case/Cartao/update-cartao";
 
 export class CartaoController {
   constructor(
     private createCartaoUseCase: RegisterCartaoUseCase,
     private deleteCartaoUseCase: DeleteCartaoUseCase,
     private getManyCartaoUseCase: GetManyCartaoUseCase,
-    private getByCartaoUseCase: GetByCartaoUseCase
+    private getByCartaoUseCase: GetByCartaoUseCase,
+    private updateCartaoUseCase: UpdateCartaoUseCase
   ) { }
 
   async create(req: FastifyRequest, reply: FastifyReply) {
@@ -100,5 +103,33 @@ export class CartaoController {
         message: error.message
       })
     }
+  }
+
+  async updateCartao(req: FastifyRequest, reply: FastifyReply) {
+
+    try {
+      const { cartaoId }: DeleteCartaoDTO = deleteCartaoDTO.parse(req.params)
+      const { limite, descricao, nomeBanco, dtfechamento, dtvencimento }: UpdateCartaoDTO = updateCartaoDTO.parse(req.body)
+      const { token }: ValidatedToken = validatedToken.parse(req.query)
+
+      const { newCartao } = await this.updateCartaoUseCase.execute({
+        limite,
+        descricao,
+        nomeBanco,
+        dtfechamento,
+        dtvencimento,
+        cartaoId,
+        token
+      })
+
+      reply.status(201).send({
+        entrada: CartaoView.updateCartao(newCartao)
+      })
+    } catch (error) {
+      reply.status(400).send({
+        message: error.message
+      })
+    }
+
   }
 }

@@ -123,7 +123,7 @@ export class CartaoController {
       })
 
       reply.status(201).send({
-        entrada: CartaoView.updateCartao(newCartao)
+        cartao: CartaoView.updateCartao(newCartao)
       })
     } catch (error) {
       reply.status(400).send({

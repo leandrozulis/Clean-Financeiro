@@ -27,6 +27,7 @@
 
     <div class="control-panel">
       <div class="dropdown">
+        <a href="#" id="consultaContaAPagar">Consulta Conta a Pagar</a>
         <a href="./criar_contas_a_pagar.html">Criar Contas a Pagar</a>
         <a href="./editar_cartao.html">Editar Conta a Pagar</a>
         <a href="#" id="excluirContaAPagar">Excluir Conta a Pagar</a>
@@ -60,6 +61,28 @@
       <tbody></tbody>
     </table>
 
+    <div id="contaAPagarModal" class="modal">
+      <div class="modal-content">
+          <span class="close" id="closeModalContaAPagar">&times;</span>
+          <h2>Rendas Fixas</h2>
+          <table id="contaAPagarTable">
+              <thead>
+                  <tr>
+                      <th></th>
+                      <th>Valor</th>
+                      <th>Descrição</th>
+                      <th>Parcela</th>
+                      <th>Data de Criação</th>
+                  </tr>
+              </thead>
+              <tbody>
+                  <!-- Os registros serão inseridos aqui dinamicamente -->
+              </tbody>
+          </table>
+          <button id="quitarContaAPagar">Pagar Conta</button>
+      </div>
+  </div>
+
     <div id="confirmationModal" class="modal">
       <div class="modal-content">
         <span class="close">&times;</span>
@@ -74,6 +97,7 @@
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.11.0/dist/sweetalert2.all.min.js"></script>
   <script src="../scripts/Conta-a-Pagar/busca_todos_contas_a_pagar.js"></script>
   <script src="../scripts/Conta-a-Pagar/busca_dados_conta_a_pagar.js"></script>
+  <script src="../scripts/Conta-a-Pagar/modal_consulta_conta_a_pagar.js"></script>
   <script src="../scripts/Cartao/busca_dados_cartao.js"></script>
   <script src="../scripts/Conta-a-Pagar/soma_contas.js"></script>
   <script src="../scripts/Conta-a-Pagar/localiza_conta_a_pagar.js"></script>

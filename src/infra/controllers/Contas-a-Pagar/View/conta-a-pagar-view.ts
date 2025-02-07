@@ -5,8 +5,8 @@ export class ContaAPagarView {
     return { id, valor, descricao, parcelas, pago, valorPago, parcelaPaga, cartaoId, userId, dtcadastro }
   }
 
-  static getByContaAPagar({ valor, descricao, parcelas, pago, valorPago, parcelaPaga, dtcadastro }: ContasAPagar) {
-    return { valor, descricao, parcelas, pago, valorPago, parcelaPaga, dtcadastro }
+  static getByContaAPagar({ id, valor, descricao, parcelas, pago, valorPago, parcelaPaga, dtcadastro }: ContasAPagar) {
+    return { id, valor, descricao, parcelas, pago, valorPago, parcelaPaga, dtcadastro }
   }
 
   static getAllContasAPagar(contasAPagar: ContasAPagar[]): any[] {

@@ -45,4 +45,31 @@ export class ContaAPagarPrismaRepository implements ContasAPagarRepository {
 
     return ContaAPagarMappers.toDomains(findManyConta)
   }
+
+  async quitarParcela(id: string, data: ContasAPagar): Promise<ContasAPagar | null> {
+
+    const parcelaQuitada = ContaAPagarMappers.toPrisma(data)
+
+    const findId = await prisma.contaAPagar.findFirst({
+      where: {
+        id
+      }
+    })
+
+    if (!findId) {
+      return null
+    }
+
+    const contaApagar = await prisma.contaAPagar.update({
+      where: {
+        id
+      },
+      data: parcelaQuitada
+    })
+
+    console.log(`Conta atualizada: ${JSON.stringify(contaApagar)}`);
+
+    return ContaAPagarMappers.toDomain(contaApagar)
+
+  }
 }

@@ -4,15 +4,21 @@ import { ContasAPagarRepository } from "../../repository/conta-a-pagar-repositor
 import { ContaRepository } from "../../repository/conta-repository";
 import { RegistroNaoEncontrado } from "../Erros/registro_nao_encontrado";
 
-interface QuitarParcelaUseCaseRequest { 
-  contaapagarId: string
-  valorPago: string
-  token: string
-  cartaoId: string
+interface QuitarParcelaUseCaseRequest {
+  contaapagarId: string;
+  valorPago: number;
+  token: string;
+  cartaoId: string;
+  valor?: number;
+  descricao?: string;
+  parcelas?: string;
+  pago?: Date;
+  parcelaPaga?: string;
+  userId?: string;
 }
 
-interface QuitarParcelaUseCaseResponse { 
-  contaapagar: ContasAPagar
+interface QuitarParcelaUseCaseResponse {
+  newContaAPagar: ContasAPagar;
 }
 
 export class QuitarParcelaUseCase {
@@ -20,47 +26,78 @@ export class QuitarParcelaUseCase {
     private contaapagarRepository: ContasAPagarRepository,
     private cartaoRepository: CartoesRepository,
     private contaRepository: ContaRepository
-    
   ) { }
-  
-  async execute({ contaapagarId, valorPago, token, cartaoId }: QuitarParcelaUseCaseRequest): Promise<QuitarParcelaUseCaseResponse> {
-    const conta = await this.contaRepository.findByToken(token)
-    const cartao = await this.cartaoRepository.getById(cartaoId)
-    const contaapagar = await this.contaapagarRepository.getById(contaapagarId)
+
+  async execute({
+    contaapagarId,
+    valorPago,
+    token,
+    cartaoId,
+    valor,
+    descricao,
+    parcelas,
+    pago
+  }: QuitarParcelaUseCaseRequest): Promise<QuitarParcelaUseCaseResponse> {
+    const conta = await this.contaRepository.findByToken(token);
+    const cartao = await this.cartaoRepository.getById(cartaoId);
+    const contaapagar = await this.contaapagarRepository.getById(contaapagarId);
 
     if (!conta) {
-      throw new RegistroNaoEncontrado()
+      throw new RegistroNaoEncontrado();
     }
 
     if (!cartao) {
-      throw new RegistroNaoEncontrado()
+      throw new RegistroNaoEncontrado();
     }
 
     if (!contaapagar) {
-      throw new RegistroNaoEncontrado()
+      throw new RegistroNaoEncontrado();
     }
 
     const parcelasPagas = parseInt(contaapagar.parcelaPaga) + 1;
-    const novoValorPago = contaapagar.valorPago + valorPago;
+    const novoValorPago = Number(contaapagar.valorPago + valorPago);
 
-    const updateDate = {
-      valorPago: novoValorPago,
-      parcelaPaga: parcelasPagas.toString()
-    }
+    const newContaAPagar = new ContasAPagar(
+      {
+        valor: valor ?? contaapagar.valor,
+        descricao: descricao ?? contaapagar.descricao,
+        parcelas: parcelas ?? contaapagar.parcelas,
+        valorPago: novoValorPago,
+        pago: pago ?? contaapagar.contaPaga(),
+        parcelaPaga: parcelasPagas.toString(),
+        userId: conta.id,
+        cartaoId: cartao.id,
+        dtcadastro: contaapagar.dtcadastro,
+      },
+      contaapagar.id
+    );
 
-    if (parcelasPagas === parseInt(contaapagar.parcelas) && parseFloat(novoValorPago) === Number(contaapagar.valor)) {
-      contaapagar.contaPaga()
+    if (
+      parcelasPagas > Number(newContaAPagar.parcelas) ||
+      Number(novoValorPago) > Number(contaapagar.valor)
+    ) {
+      throw new Error("Número de parcelas pagas ou valor pago excede o total permitido.")
     }
 
     try {
-      this.contaapagarRepository.quitarParcela(contaapagarId, updateDate)
-      cartao.entrada(Number(valorPago))
-      await this.cartaoRepository.updateSaldo(cartao.id, cartao.limite)
-      return {
-        contaapagar
+
+      if (
+        parcelasPagas === Number(newContaAPagar.parcelas) &&
+        Number(novoValorPago) === Number(contaapagar.valor)
+      ) {
+        newContaAPagar.contaPaga();
       }
+
+      await this.contaapagarRepository.quitarParcela(contaapagarId, newContaAPagar);
+      cartao.entrada(Number(valorPago));
+      await this.cartaoRepository.updateSaldo(cartao.id, cartao.limite);
+
+      return {
+        newContaAPagar,
+      };
     } catch (error) {
-      throw new Error("Ops, deu erro!!")
+      console.error("Erro ao quitar parcela:", error);
+      throw new Error("Número de parcelas pagas ou valor pago excede o total permitido.");
     }
   }
 }

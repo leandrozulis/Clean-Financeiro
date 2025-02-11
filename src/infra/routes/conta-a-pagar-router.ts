@@ -8,6 +8,7 @@ import { verifyJWT } from "../middleware/authenticate";
 import { GetManyContaApagarUseCase } from "../../app/use-case/Contas-a-Pagar/get-many-conta-pagar";
 import { DeleteContaAPagarUseCase } from "../../app/use-case/Contas-a-Pagar/remote-conta-a-pagar";
 import { GetByContaAPagarUseCase } from "../../app/use-case/Contas-a-Pagar/get-conta-a-pagar";
+import { QuitarParcelaUseCase } from "../../app/use-case/Contas-a-Pagar/quitar-parcela";
 
 export async function ContaAPagarRouter(app: FastifyInstance) {
   const contasAPagarPrismaRepository = new ContaAPagarPrismaRepository()
@@ -17,7 +18,8 @@ export async function ContaAPagarRouter(app: FastifyInstance) {
   const getByContaAPagarUseCase = new GetByContaAPagarUseCase(contasAPagarPrismaRepository, cartaoPrismaRepository, contaPrismaRepository)
   const getManyContasAPagarUseCase = new GetManyContaApagarUseCase(contasAPagarPrismaRepository, cartaoPrismaRepository, contaPrismaRepository)
   const deleteContaAPagarUseCase = new DeleteContaAPagarUseCase(contasAPagarPrismaRepository, cartaoPrismaRepository, contaPrismaRepository)
-  const contaAPagarController = new ContasAPagarController(createContaAPagarUseCase, getByContaAPagarUseCase, getManyContasAPagarUseCase, deleteContaAPagarUseCase)
+  const quitarParcelaUseCase = new QuitarParcelaUseCase(contasAPagarPrismaRepository, cartaoPrismaRepository, contaPrismaRepository)
+  const contaAPagarController = new ContasAPagarController(createContaAPagarUseCase, getByContaAPagarUseCase, getManyContasAPagarUseCase, deleteContaAPagarUseCase, quitarParcelaUseCase)
 
   app.get('/find/allcontasapagar', { onRequest: [verifyJWT] }, async (req: FastifyRequest, reply: FastifyReply) => {
     await contaAPagarController.getManyContasAPagar(req, reply)
@@ -29,6 +31,10 @@ export async function ContaAPagarRouter(app: FastifyInstance) {
 
   app.post('/register/contaapagar', { onRequest: [verifyJWT] }, async (req: FastifyRequest, reply: FastifyReply) => {
     await contaAPagarController.register(req, reply)
+  })
+
+  app.put('/atualiza/contaapagar', { onRequest: [verifyJWT] }, async (req: FastifyRequest, reply: FastifyReply) => {
+    await contaAPagarController.quitarParcela(req, reply)
   })
 
   app.delete('/remove/contaapagar', { onRequest: [verifyJWT] }, async (req: FastifyRequest, reply: FastifyReply) => {

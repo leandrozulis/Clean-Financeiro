@@ -8,6 +8,8 @@ import { GetManyContaApagarUseCase } from "../../../app/use-case/Contas-a-Pagar/
 import { deleteContaAPagarDTO, DeleteContaAPagarDTO } from "./DTO/delete-conta-a-pagar-dto";
 import { DeleteContaAPagarUseCase } from "../../../app/use-case/Contas-a-Pagar/remote-conta-a-pagar";
 import { GetByContaAPagarUseCase } from "../../../app/use-case/Contas-a-Pagar/get-conta-a-pagar";
+import { QuitarParcelaUseCase } from "../../../app/use-case/Contas-a-Pagar/quitar-parcela";
+import { quitarparcelaContaAPagarDTO, QuitarParcelaContaAPagarDTO } from "./DTO/quitar-conta-a-pagar-dto";
 
 export class ContasAPagarController {
 
@@ -15,7 +17,8 @@ export class ContasAPagarController {
     private createContaAPagarUseCase: CreateContaAPagarUseCase,
     private getByContaAPagarUseCase: GetByContaAPagarUseCase,
     private getManyContaApagarUseCase: GetManyContaApagarUseCase,
-    private deleteContaAPagarUseCase: DeleteContaAPagarUseCase
+    private deleteContaAPagarUseCase: DeleteContaAPagarUseCase,
+    private quitarParcelaUseCase: QuitarParcelaUseCase
   ) { }
 
   async register(req: FastifyRequest, reply: FastifyReply) {
@@ -99,6 +102,32 @@ export class ContasAPagarController {
 
       return reply.status(200).send({
         contaApagar: ContaAPagarView.deleteContaAPagar(contaapagar)
+      })
+    } catch (error) {
+      reply.status(400).send({
+        message: error.message
+      })
+    }
+  }
+
+  async quitarParcela(req: FastifyRequest, reply: FastifyReply) {
+    try {
+      const { cartaoId }: ValidatedCartaoIdDTO = validatedCartaoIdDTO.parse(req.query)
+      const { token }: ValidatedToken = validatedToken.parse(req.query)
+      const { contaapagarId, valorPago }: QuitarParcelaContaAPagarDTO = quitarparcelaContaAPagarDTO.parse(req.body)
+
+      const { newContaAPagar } = await this.quitarParcelaUseCase.execute({
+        contaapagarId,
+        valorPago,
+        cartaoId,
+        token
+      })
+
+      console.log('controller', newContaAPagar);
+
+
+      return reply.status(200).send({
+        contaApagar: ContaAPagarView.updateContaAPagar(newContaAPagar)
       })
     } catch (error) {
       reply.status(400).send({

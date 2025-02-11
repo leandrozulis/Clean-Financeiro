@@ -33,7 +33,7 @@ function renderContaApagar(contaPagar) {
     const row = document.createElement('tr');
     row.innerHTML = `
       <td><input type="checkbox" name="contaAPagarCheckbox" value="${contaPagar.id}"></td>
-      <td>${valorParcela.toFixed(2)}</td>
+      <td>${valorParcela.toFixed(3)}</td>
       <td>${contaPagar.descricao}</td>
       <td>${i}</td>
       <td>${new Date(contaPagar.dtcadastro).toLocaleDateString()}</td>

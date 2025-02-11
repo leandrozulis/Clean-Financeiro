@@ -5,5 +5,5 @@ export interface ContasAPagarRepository {
   delete(id: string): Promise<ContasAPagar | null>
   findManyContasAPagar(cartaoId: string): Promise<ContasAPagar[] | null>
   getById(id: string): Promise<ContasAPagar | null>
-  quitarParcela(id: string, data: { valorPago, parcelaPaga }): Promise<ContasAPagar | null>
+  quitarParcela(id: string, data: ContasAPagar): Promise<ContasAPagar | null>
 }

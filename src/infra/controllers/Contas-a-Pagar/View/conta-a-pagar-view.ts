@@ -27,4 +27,8 @@ export class ContaAPagarView {
   static deleteContaAPagar({ valor, descricao, parcelas, pago, valorPago, parcelaPaga, dtcadastro }: ContasAPagar) {
     return { valor, descricao, parcelas, pago, valorPago, parcelaPaga, dtcadastro }
   }
+
+  static updateContaAPagar({ id, valor, descricao, parcelas, pago, valorPago, parcelaPaga }: ContasAPagar) {
+    return { id, valor, descricao, parcelas, pago, valorPago, parcelaPaga }
+  }
 }

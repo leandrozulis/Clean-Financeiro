@@ -123,9 +123,6 @@ export class ContasAPagarController {
         token
       })
 
-      console.log('controller', newContaAPagar);
-
-
       return reply.status(200).send({
         contaApagar: ContaAPagarView.updateContaAPagar(newContaAPagar)
       })

@@ -15,6 +15,8 @@ consultaContaAPagar.addEventListener('click', async () => {
   }
 });
 
+let valorParcela;
+
 // Função para renderizar a conta a pagar na tabela
 function renderContaApagar(contaPagar) {
   contaAPagarTableBody.innerHTML = '';
@@ -24,7 +26,7 @@ function renderContaApagar(contaPagar) {
     return;
   }
 
-  const valorParcela = contaPagar.valor / contaPagar.parcelas;
+  valorParcela = contaPagar.valor / contaPagar.parcelas;
 
   console.log(contaPagar);
   
@@ -78,13 +80,13 @@ window.addEventListener('click', (event) => {
 
 // Evento para confirmar a seleção da renda fixa
 quitarContaAPagar.addEventListener('click', async () => {
-  const quitarContaAPagar = await DeletarRendaFixa()
+  const quitarContaAPagar = await quitarParcelaContaAPagar(valorParcela)
 
   if (quitarContaAPagar) {
-    exibeSucesso('Renda Fixa deletada com sucesso!').then(() => {
-      window.location.href = '../../Tela Inicial/Inicio/tela_inicial.html';
+    exibeSucesso('Parcela paga com sucesso!').then(() => {
+      window.location.href = '../../Tela Inicial/Conta_a_pagar/contas_a_pagar.html';
+      localStorage.removeItem('registroIdConta')
+      localStorage.removeItem('contaapagarId')
     })
-  } else {
-    exibeError('Erro ao deletar Renda Fixa.');
   }
 });

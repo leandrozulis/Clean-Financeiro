@@ -21,16 +21,27 @@ async function retornoDadosLista(data) {
     const row = document.createElement('tr');
     row.dataset.id = item.id;
 
+    const dataPagamento = item.pago === null ? 'Pendente' : new Date(item.pago).toLocaleString('pt-BR');
+    const dataPagamentoClass = item.pago === null ? 'pendente' : 'pago';
+
     row.innerHTML = `
         <td>${item.descricao}</td>
         <td>${item.valor.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</td>
         <td>${item.parcelas}</td>
+        <td>${item.valorPago.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</td>
         <td>${new Date(item.dtcadastro).toLocaleString('pt-BR')}</td>
+        <td class="${dataPagamentoClass}">${dataPagamento}</td>
     `;
 
     row.addEventListener('click', (e) => {
       e.stopPropagation();
       localStorage.setItem('contaapagarId', row.dataset.id)
+
+      document.querySelectorAll('#dataTableContaAPagar tbody tr').forEach(tr => {
+        tr.style.backgroundColor = "";
+      });
+
+      row.style.backgroundColor = "#c9edc6"
     })
 
     tableBody.appendChild(row);

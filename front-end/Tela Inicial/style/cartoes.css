@@ -197,8 +197,10 @@ header .profile2 a:hover {
   margin: 5px;
   border: none;
   border-radius: 5px;
-  cursor: pointer;
   font-size: 16px;
+  background-color: #77aaff;
+  cursor: pointer;
+  color: #fff;
 }
 
 #confirmDelete {
@@ -263,4 +265,12 @@ table tr:hover {
 table tr {
   cursor: pointer;
   font-weight: 600;
+}
+
+.pendente {
+  color: red;
+}
+
+.pago {
+  color: green;
 }

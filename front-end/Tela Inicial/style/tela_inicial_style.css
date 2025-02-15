@@ -255,6 +255,8 @@ table tr {
   border-radius: 5px;
   cursor: pointer;
   font-size: 16px;
+  background-color: #77aaff;
+  color: #fff;
 }
 
 #confirmDelete {

@@ -38,10 +38,29 @@ function displayCartoes(cartoes) {
       cardElement.addEventListener('click', (e) => {
         e.stopPropagation();
         localStorage.setItem('idCartao', cardElement.dataset.id);
+        cardElement.style.backgroundColor = "#888"
+        cardElement.style.color = "#fff"
+
+        document.querySelectorAll('.card').forEach(card => {
+          if (card !== cardElement) {
+            card.style.backgroundColor = "";
+            card.style.color = "";
+          }
+        });
       });
       cardsContainer.appendChild(cardElement);
     });
+
+    document.addEventListener('click', (e) => {
+      if (!cardsContainer.contains(e.target)) {
+        document.querySelectorAll('.card').forEach(card => {
+          card.style.backgroundColor = "";
+          card.style.color = "";
+        });
+      }
+    });
   }
+  
 }
 
 window.onload = async function () {

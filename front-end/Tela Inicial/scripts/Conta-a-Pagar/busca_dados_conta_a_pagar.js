@@ -1,4 +1,5 @@
 const mostraLimite = document.querySelector('#mostraLimite p')
+const valorPago = document.querySelector('#mostraValorPago p')
 
 async function carregarDados() {   
 
@@ -9,7 +10,9 @@ async function carregarDados() {
   // Lista
   const todosValores = await buscaDadosContasAPagar()  
   todosValores.sort((a, b) => new Date(a.dtcadastro) - new Date(b.dtcadastro));
-  retornoDadosLista(todosValores);
+  retornoDadosLista(todosValores);  
+
+  valorPago.innerHTML = todosValores.reduce((acc, item) => acc + item.valorPago, 0).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }); 
 
 }
 

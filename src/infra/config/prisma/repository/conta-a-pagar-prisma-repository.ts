@@ -72,4 +72,28 @@ export class ContaAPagarPrismaRepository implements ContasAPagarRepository {
     return ContaAPagarMappers.toDomain(contaApagar)
 
   }
+
+  async updateSaldo(id: string, valor: number): Promise<ContasAPagar | null> {
+    const findId = await prisma.contaAPagar.findFirst({
+      where: {
+        id
+      }
+    })
+
+    if (!findId) {
+      return null
+    }
+
+    const contaAPagar = await prisma.contaAPagar.update({
+      where: {
+        id
+      },
+      data: {
+        valor,
+        dtatualizacao: new Date()
+      }
+    })
+
+    return ContaAPagarMappers.toDomain(contaAPagar)
+  }
 }

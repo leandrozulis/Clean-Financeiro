@@ -10,6 +10,8 @@ import { DeleteContaAPagarUseCase } from "../../../app/use-case/Contas-a-Pagar/r
 import { GetByContaAPagarUseCase } from "../../../app/use-case/Contas-a-Pagar/get-conta-a-pagar";
 import { QuitarParcelaUseCase } from "../../../app/use-case/Contas-a-Pagar/quitar-parcela";
 import { quitarparcelaContaAPagarDTO, QuitarParcelaContaAPagarDTO } from "./DTO/quitar-conta-a-pagar-dto";
+import { updateContaAPagarDTO, UpdateContaAPagarDTO } from "./DTO/update-conta-a-pagar-dto";
+import { UpdateContaAPagarUseCase } from "../../../app/use-case/Contas-a-Pagar/update-conta-a-pagar";
 
 export class ContasAPagarController {
 
@@ -18,7 +20,8 @@ export class ContasAPagarController {
     private getByContaAPagarUseCase: GetByContaAPagarUseCase,
     private getManyContaApagarUseCase: GetManyContaApagarUseCase,
     private deleteContaAPagarUseCase: DeleteContaAPagarUseCase,
-    private quitarParcelaUseCase: QuitarParcelaUseCase
+    private quitarParcelaUseCase: QuitarParcelaUseCase,
+    private updateContaAPagarUseCase: UpdateContaAPagarUseCase
   ) { }
 
   async register(req: FastifyRequest, reply: FastifyReply) {
@@ -131,6 +134,28 @@ export class ContasAPagarController {
         message: error.message
       })
     }
+  }
+
+  async updateContaAPagar(req: FastifyRequest, reply: FastifyReply) {
+
+    try {
+      const { cartaoId }: ValidatedCartaoIdDTO = validatedCartaoIdDTO.parse(req.query)
+      const { valor, descricao, parcelas, contaapagarId }: UpdateContaAPagarDTO = updateContaAPagarDTO.parse(req.body)
+      const { token }: ValidatedToken = validatedToken.parse(req.query)
+
+      const { newContaAPagar } = await this.updateContaAPagarUseCase.execute({
+        contaapagarId, cartaoId, valor, descricao, parcelas, token
+      })
+
+      reply.status(200).send({
+        contaApagar: ContaAPagarView.updateContaAPagar(newContaAPagar)
+      })
+    } catch (error) {
+      reply.status(400).send({
+        message: error.message
+      })
+    }
+
   }
 
 }

@@ -1,6 +1,6 @@
 async function quitarParcelaContaAPagar(valor) {
   try {
-    const response = await fetch(`http://localhost:2578/atualiza/contaapagar?token=${localStorage.getItem('tokenConta')}&cartaoId=${localStorage.getItem('idCartao')}`, {
+    const response = await fetch(`http://localhost:2578/quitar/contaapagar?token=${localStorage.getItem('tokenConta')}&cartaoId=${localStorage.getItem('idCartao')}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',

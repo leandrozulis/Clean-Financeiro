@@ -6,12 +6,14 @@ import { RendaFixaView } from "./View/renda-fixa-view";
 import { GetManyRendaFixasUseCase } from "../../../app/use-case/Renda-Fixa/get-all-renda-fixa";
 import { removeRendaFixaDTO, RemoveRendaFixaDTO } from "./DTO/delete-renda-fixa-dto";
 import { DeleteRendaFixaUseCase } from "../../../app/use-case/Renda-Fixa/delete-renda-fixa";
+import { SaqueRendaFixaUseCase } from "../../../app/use-case/Renda-Fixa/saque-renda-fixa";
 
 export class RendaFixaController {
   constructor(
     private createRendaFixaUseCase: CreateRendaFixaUseCase,
     private getManyRendaFixasUseCase: GetManyRendaFixasUseCase,
-    private deleteRendaFixaUseCase: DeleteRendaFixaUseCase
+    private deleteRendaFixaUseCase: DeleteRendaFixaUseCase,
+    private saqueRendaFixaUseCase: SaqueRendaFixaUseCase
   ) { }
 
   async register(req: FastifyRequest, reply: FastifyReply) {
@@ -67,6 +69,29 @@ export class RendaFixaController {
       reply.status(200).send({
         message: 'Renda Fixa Deletada',
         rendaFixa: RendaFixaView.deleteRendaFixa(rendaFixa)
+      })
+    } catch (error) {
+      reply.status(400).send({
+        message: error.message
+      })
+    }
+  }
+
+  async saqueRendaFixa(req: FastifyRequest, reply: FastifyReply) {
+    try {
+      const { rendaFixaId }: RemoveRendaFixaDTO = removeRendaFixaDTO.parse(req.body)
+      const { valor }: CreateRendaFixaDTO = createRendaFixaDTO.parse(req.body)
+      const { token }: ValidatedToken = validatedToken.parse(req.query)
+
+      const { saqueRenda } = await this.saqueRendaFixaUseCase.execute({
+        valor,
+        rendaFixaId,
+        token
+      })
+
+      reply.status(200).send({
+        message: 'Saque Renda Fixa Realizado.',
+        rendaFixa: RendaFixaView.createRendaFixa(saqueRenda)
       })
     } catch (error) {
       reply.status(400).send({

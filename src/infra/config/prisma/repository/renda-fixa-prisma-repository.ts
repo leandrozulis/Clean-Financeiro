@@ -37,4 +37,42 @@ export class RendaFixaPrismaRepository implements RendaFixaRepository {
     return RendaFixaMappers.toDomain(rendaFixa)
   }
 
+  async getById(id: string): Promise<RendaFixa | null> {
+    const rendaFixa = await prisma.rendaFixa.findFirst({
+      where: {
+        id
+      }
+    })
+
+    if (!rendaFixa) {
+      return null
+    }
+
+    return RendaFixaMappers.toDomain(rendaFixa)
+  }
+
+  async updateSaldo(id: string, valor: number): Promise<RendaFixa | null> {
+    const findId = await prisma.rendaFixa.findFirst({
+      where: {
+        id
+      }
+    })
+
+    if (!findId) {
+      return null
+    }
+
+    const rendaFixa = await prisma.rendaFixa.update({
+      where: {
+        id: id
+      },
+      data: {
+        valor,
+        dtatualizacao: new Date()
+      }
+    })
+
+    return RendaFixaMappers.toDomain(rendaFixa)
+  }
+
 }

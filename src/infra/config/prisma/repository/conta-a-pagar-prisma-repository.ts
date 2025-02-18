@@ -67,8 +67,6 @@ export class ContaAPagarPrismaRepository implements ContasAPagarRepository {
       data: parcelaQuitada
     })
 
-    console.log(`Conta atualizada: ${JSON.stringify(contaApagar)}`);
-
     return ContaAPagarMappers.toDomain(contaApagar)
 
   }
